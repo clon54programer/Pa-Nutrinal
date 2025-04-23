@@ -1,5 +1,5 @@
 # from production import Production
-from production.production import Production
+from production import Production
 
 
 class MeatProduction(Production):

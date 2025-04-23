@@ -1,4 +1,4 @@
-from product.product import Product
+from product import Product
 
 
 class Meat(Product):
