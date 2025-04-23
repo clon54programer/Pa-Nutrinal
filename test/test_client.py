@@ -1,4 +1,4 @@
-from model.client.client import Client, BuilderClient
+from client.client import Client, BuilderClient
 
 
 def test_instance() -> None:
