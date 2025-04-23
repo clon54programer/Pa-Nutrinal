@@ -1,4 +1,4 @@
-from meat_production import MeatProduction
+from model.production.meat_production import MeatProduction
 
 
 def test_intance_meat_production():
