@@ -19,3 +19,7 @@ license = "MIT"
 dependencies = [
 "pytest==8.3.5"
 ]
+
+[tool.setuptools.packages.find]
+find = ["src"]
+exclude = ["doc"]
