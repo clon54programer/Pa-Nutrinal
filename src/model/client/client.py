@@ -4,6 +4,23 @@ class Client:
     """
     Es una abstracion de un cliente de nutrinal,
     que solo guarda su nombre y sus informacion de contacto.
+
+    TODO: Integrar los modelos de Django a la clase.
+
+    Atributos
+    ---------
+
+    __name: str
+        Es una cadena que almacena un nombre de una persona
+        natural o de una organizacion.
+    
+    __email: str
+        Es una cadena que almacena el correo de la persona
+        o organizacion.
+    
+    __phone_number: str
+        Es una cadena que almacena un numero de telefono.
+        NOTE: Esta cadena solo puede tener numeros en ella.
     """
 
     def __init__(self, name: str, email: str, phone_number: str):
