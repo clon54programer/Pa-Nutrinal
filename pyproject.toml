@@ -23,3 +23,11 @@ dependencies = [
 
 [tool.setuptools]
 packages = { find = { where = ["src"], exclude = ["doc"] } }
+
+[tool.pytest.ini_options]
+testpaths = [
+    "test"
+]
+pythonpath = [
+    "src"
+]
