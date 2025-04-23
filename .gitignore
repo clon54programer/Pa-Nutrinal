@@ -7,5 +7,6 @@ __pycache__/
 # Configuración de entornos virtuales
 venv/
 env/
+.env/
 build/
 PA_Nutrinal.egg-info/
