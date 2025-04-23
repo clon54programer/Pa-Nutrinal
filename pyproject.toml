@@ -17,9 +17,9 @@ authors = [
 readme = "readme.md"
 license = "MIT"
 dependencies = [
-"pytest==8.3.5"
+"pytest==8.3.5",
+"build==1.2.2.post1"
 ]
 
-[tool.setuptools.packages.find]
-where = ["src"]
-exclude = ["doc"]
+[tool.setuptools]
+packages = { find = { where = ["src"], exclude = ["doc"] } }
