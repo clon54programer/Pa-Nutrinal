@@ -21,6 +21,10 @@ class Client:
     __phone_number: str
         Es una cadena que almacena un numero de telefono.
         NOTE: Esta cadena solo puede tener numeros en ella.
+
+    __cant_order: int
+        Es un numero entero que almacena el numero de compras que 
+        ha echo el cliente.
     """
 
     def __init__(self, name: str, email: str, phone_number: str):

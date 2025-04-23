@@ -2,10 +2,26 @@
 
 class Product:
     """
-Es una clase base para los productos
-de nutrinal.
-Esta clase solo tiene definiciones de los
-mienbros genericos de los productos y sus getters.
+    Es una clase generica para representar los productos
+    de nutrinal
+
+    TODO: Integrar los modelos de Django a la clase.
+
+    Atributos
+    ---------
+    
+    __name_product: str
+        Es una cadena que almacena el nombre de un producto
+    
+    __code: int
+        Es un numero entero que identifica el producto.
+        Su funcion es facilitar la busqueda de un produto.
+    
+    __price: int
+        Es un numero entero que hace referencia al valor del producto.
+
+
+
 """
 
     def __init__(self, name_product: str = "",  code: int = 0, price: int = 0):
