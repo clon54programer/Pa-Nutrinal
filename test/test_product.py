@@ -1,4 +1,4 @@
-from product.meat import Meat
+from model.product.meat import Meat
 
 
 def test_meat():

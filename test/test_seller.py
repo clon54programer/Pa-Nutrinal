@@ -1,4 +1,4 @@
-from seller.seller import Seller
+from model.seller.seller import Seller
 
 
 def test_intance():
