@@ -71,10 +71,14 @@ class Product(models.Model):
     
     __price: int
         Es un numero entero que hace referencia al valor del producto.
+    
+    __description: str
+        Es una cadena que almacena la descripcion del producto
     """
     name_product = models.CharField(max_length=50)
     code = models.CharField(max_length=100,unique=True)
     price = models.DecimalField(max_digits=15,decimal_places=2)
+    description = models.TextField()
 
 class Production(models.Model):
     """
