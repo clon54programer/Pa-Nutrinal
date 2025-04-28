@@ -49,7 +49,49 @@ class Seller(models.Model):
     """
 
     name = models.CharField(max_length=100)
-    id = models.CharField(max_length=20)
+    id = models.CharField(max_length=20,unique=True)
+
+class Product(models.Model):
+    """
+    Es una clase generica para representar los productos
+    de nutrinal
+
+    TODO: Integrar los modelos de Django a la clase.
+
+    Atributos
+    ---------
+    
+    __name_product: str
+        Es una cadena que almacena el nombre de un producto
+    
+    __code: int
+        Es un numero entero que identifica el producto.
+        Su funcion es facilitar la busqueda de un produto.
+    
+    __price: int
+        Es un numero entero que hace referencia al valor del producto.
+    """
+
+class Production(models.Model):
+     """
+        Es una clase que representa de un forma simplificada
+        la producion de un producto
+
+        Atributos
+        ---------
+
+        __cant: int
+            Es un numero entero que almacena la cantidad
+            disponible de un producto.
+        
+        __name_product: str
+            Es una cadena que almacena el nombre de un producto.
+            NOTE: Esta cadena solo debe almacenar letras.
+
+        __code: int
+            Es un numero entero que almacena el codigo de identificacion
+            del producto.
+    """
 
 
 
