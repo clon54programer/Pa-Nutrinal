@@ -120,6 +120,10 @@ class Order(models.Model):
         Es una llave forano que hace referencia al cliente.
         NOTE: Cuando se haga el pedido se debe verificar que
         el cliente este en la base de datos.
+
+    _product: LLave forana
+        Es una llave foranea que identifica los productos que 
+        compra el cliente.
     """
     cant_product = models.BigIntegerField(default=0)
     #cant_product = models.IntegerField()
