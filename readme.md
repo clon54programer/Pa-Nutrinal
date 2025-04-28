@@ -4,5 +4,5 @@
 
 
 
-## Cosas faltantes
+## Listas de pendientes
 - Agregar la conecion a MySql
