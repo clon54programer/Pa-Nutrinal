@@ -5,4 +5,4 @@
 
 
 ## Listas de pendientes
-- Agregar la conecion a MySql
+- Agregar la conexsion a MySql
