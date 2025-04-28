@@ -82,7 +82,7 @@ class Product(models.Model):
     Atributos
     ---------
     
-    __name_product: str
+    __name: str
         Es una cadena que almacena el nombre de un producto
     
     __code: int
@@ -95,7 +95,7 @@ class Product(models.Model):
     __description: str
         Es una cadena que almacena la descripcion del producto.
     """
-    name_product = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
     code = models.CharField(max_length=100,unique=True)
     price = models.DecimalField(max_digits=15,decimal_places=2)
     description = models.TextField()
@@ -184,5 +184,6 @@ class Order(models.Model):
         """
         return self.status
 
-    def description(self) -> str:
-        return f""
+    def get_description(self) -> str:
+        produts = self.product.all().order_by("-name")
+        return f"Status: {self.status} product: {produts} destination: {self.shipping_destination} Client: {self.client.name} Seller: {self.seller.name} "
