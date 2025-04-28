@@ -45,11 +45,14 @@ class Seller(models.Model):
     _id: str
         Es una cadena que almacena la tarjeta de identificacion del vendedor.
         NOTE: Solo debe almacena numeros enteros.
+    _date_joined: DateField
+        Es un campo que almacena la fecha de incorporacion del sistema.
         
     """
 
     name = models.CharField(max_length=100)
     id = models.CharField(max_length=20,unique=True)
+    date_joined =  models.DateField(auto_now_add=True)
 
 class Product(models.Model):
     """
