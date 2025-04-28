@@ -116,9 +116,8 @@ class Order(models.Model):
         Es un numero de entero que almacena la cantidad del 
         producto que se debe enviar
 
-    __id_product: int
-        Es un numero entero que almacena el codigo que identica
-        al producto que se compra.
+    _status: str
+        Es un cadena que registra el estado del pedido.
 
     __shipping_destination: str
         Es una cadena que almacena la direccion a la cual se debe
@@ -138,7 +137,12 @@ class Order(models.Model):
         compra el cliente.
     """
     cant_product = models.BigIntegerField(default=0)
-    #cant_product = models.IntegerField()
+    status = models.CharField(max_length=50, choices=[
+    ("pending", "Pendiente"),
+    ("shipped", "Enviado"),
+    ("delivered", "Entregado"),
+    ("cancelled", "Cancelado")
+], default="pending")
     shipping_destination = models.CharField(max_length=200)
     seller = models.ForeignKey(Seller,on_delete=models.CASCADE)
     client = models.ForeignKey(Client,on_delete=models.CASCADE)
