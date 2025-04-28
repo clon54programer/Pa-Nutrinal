@@ -30,6 +30,25 @@ class Client(models.Model):
     """
 
 
+class Seller(models.Model):
+    """
+    Es una clase que representa a  un
+    vendedor de nutrinal.
+    
+    TODO: Integrar los modelos de Django a la clase.
+
+    Atributos
+    ---------
+
+    __name: str
+        Es una cadena que almacena el nombre del vendedor.
+        NOTE: Esta cadena solo debe almacenar letras.
+    _id: str
+        Es una cadena que almacena la tarjeta de identificacion del vendedor.
+        NOTE: Solo debe almacena numeros enteros.
+        
+    """
+
 
 
 class Order(models.Model):
