@@ -23,11 +23,23 @@ class Client(models.Model):
     __phone_number: str
         Es una cadena que almacena un numero de telefono.
         NOTE: Esta cadena solo puede tener numeros en ella.
+    
+    __identifier: str
+        Es un cadena que almacena un identificador del cliente.
     """
 
     name = models.CharField(max_length=200)
     email = models.EmailField(max_length=254)
     phone_number = models.CharField(max_length=15)
+    identifier = models.CharField(max_length=50, unique=True)
+
+
+    def get_orders(self):
+        """
+        Devuelve los pedidos que a ordenado
+        el cliente.
+        """
+        return Order.objects.filter(client=self)
 
 
 class Seller(models.Model):
