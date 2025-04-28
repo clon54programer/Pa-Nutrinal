@@ -6,7 +6,8 @@ class Client(models.Model):
     Es una abstracion de un cliente de nutrinal,
     que solo guarda su nombre y sus informacion de contacto.
 
-    TODO: Integrar los modelos de Django a la clase.
+    TODO: Crear un metodo o una funcionalidad para poder rastrear los pedidos de un cliente
+
 
     Atributos
     ---------
@@ -26,9 +27,6 @@ class Client(models.Model):
     __cant_order: int
         Es un numero entero que almacena el numero de compras que 
         ha echo el cliente.
-
-    __order: llave foranea
-        Es una llave foranea que enlaza su historial de pedidos
     """
 
 
