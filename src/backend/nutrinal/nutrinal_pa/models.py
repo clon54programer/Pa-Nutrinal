@@ -23,11 +23,11 @@ class Client(models.Model):
     __phone_number: str
         Es una cadena que almacena un numero de telefono.
         NOTE: Esta cadena solo puede tener numeros en ella.
-
-    __cant_order: int
-        Es un numero entero que almacena el numero de compras que 
-        ha echo el cliente.
     """
+
+    name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=254)
+    phone_number = models.CharField(max_length=15)
 
 
 class Seller(models.Model):
