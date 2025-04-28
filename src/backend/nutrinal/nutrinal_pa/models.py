@@ -185,5 +185,5 @@ class Order(models.Model):
         return self.status
 
     def get_description(self) -> str:
-        produts = self.product.all().order_by("-name")
-        return f"Status: {self.status} product: {produts} destination: {self.shipping_destination} Client: {self.client.name} Seller: {self.seller.name} "
+        products = self.product.all().order_by("-name")
+        return f"Status: {self.status} product: {products} destination: {self.shipping_destination} Client: {self.client.name} Seller: {self.seller.name} "
