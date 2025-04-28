@@ -76,7 +76,7 @@ class Seller(models.Model):
 
 class Product(models.Model):
     """
-    Es una clase generica para representar los productos
+    Es una clase generica para representar y describir los productos
     de nutrinal
 
     Atributos
@@ -103,7 +103,7 @@ class Product(models.Model):
 class Production(models.Model):
     """
         Es una clase que representa de un forma simplificada
-        la producion de un producto. 
+        la producion y gestiona la cantidad disponible de un producto.
 
         Atributos
         ---------
@@ -133,7 +133,9 @@ class Production(models.Model):
 
 class Order(models.Model):
     """
-    Es una representacion de un pedido.
+    Es una representacion de un pedido y si funcion
+    es gestionar la transacion de las partes involutradas
+    (vendedor y cliente).
 
     Atributos
     --------
