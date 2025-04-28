@@ -183,3 +183,6 @@ class Order(models.Model):
         y cancelado.
         """
         return self.status
+
+    def description(self) -> str:
+        return f""
