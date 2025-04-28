@@ -35,7 +35,6 @@ class Seller(models.Model):
     Es una clase que representa a  un
     vendedor de nutrinal.
     
-    TODO: Integrar los modelos de Django a la clase.
 
     Atributos
     ---------
