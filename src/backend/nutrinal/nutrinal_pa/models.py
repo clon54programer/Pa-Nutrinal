@@ -49,6 +49,9 @@ class Seller(models.Model):
         
     """
 
+    name = models.CharField(max_length=100)
+    id = models.CharField(max_length=20)
+
 
 
 class Order(models.Model):
