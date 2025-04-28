@@ -173,3 +173,6 @@ class Order(models.Model):
     seller = models.ForeignKey(Seller,on_delete=models.CASCADE)
     client = models.ForeignKey(Client,on_delete=models.CASCADE)
     product = models.ManyToManyField(Product)
+
+    def get_status(self):
+        return self.status
