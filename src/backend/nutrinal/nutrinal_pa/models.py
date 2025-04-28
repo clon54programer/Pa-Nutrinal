@@ -71,27 +71,27 @@ class Product(models.Model):
     __price: int
         Es un numero entero que hace referencia al valor del producto.
     """
+    name_product = models.CharField(max_length=50)
+    code = models.CharField(max_length=100,unique=True)
+    price = models.DecimalField(max_digits=15,decimal_places=2)
 
 class Production(models.Model):
-     """
+    """
         Es una clase que representa de un forma simplificada
-        la producion de un producto
+        la producion de un producto. 
 
         Atributos
         ---------
-
-        __cant: int
-            Es un numero entero que almacena la cantidad
-            disponible de un producto.
+        product: llave foranea
+            Es una llave foranea que identifica la relacion
+            entre el producto y la producion
         
-        __name_product: str
-            Es una cadena que almacena el nombre de un producto.
-            NOTE: Esta cadena solo debe almacenar letras.
-
-        __code: int
-            Es un numero entero que almacena el codigo de identificacion
-            del producto.
+        cant_product: Integer
+            Es un numero entero sin signo que almacena la cantidad
+            disponible de un producto.    
     """
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)  
+    cant_available = models.PositiveIntegerField()
 
 
 
