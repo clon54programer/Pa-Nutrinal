@@ -56,8 +56,6 @@ class Product(models.Model):
     Es una clase generica para representar los productos
     de nutrinal
 
-    TODO: Integrar los modelos de Django a la clase.
-
     Atributos
     ---------
     
