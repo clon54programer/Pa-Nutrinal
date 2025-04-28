@@ -60,7 +60,7 @@ class Order(models.Model):
     Atributos
     --------
 
-    __cant: int
+    __cant_product: int
         Es un numero de entero que almacena la cantidad del 
         producto que se debe enviar
 
@@ -81,3 +81,8 @@ class Order(models.Model):
         NOTE: Cuando se haga el pedido se debe verificar que
         el cliente este en la base de datos.
     """
+    cant_product = models.BigIntegerField(default=0)
+    #cant_product = models.IntegerField()
+    shipping_destination = models.CharField(max_length=200)
+    seller = models.ForeignKey(Seller,on_delete=models.CASCADE)
+    client = models.ForeignKey(Client,on_delete=models.CASCADE)
