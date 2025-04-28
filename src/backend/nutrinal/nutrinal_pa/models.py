@@ -123,6 +123,12 @@ class Production(models.Model):
     cant_available = models.PositiveIntegerField()
     date_updated = models.DateTimeField(auto_now=True)
 
+    def is_in_stock(self) -> bool:
+        """
+        Devuelve un true si hay disponibilidad de un producto.
+        """
+        return self.cant_available > 0
+
 
 
 class Order(models.Model):
