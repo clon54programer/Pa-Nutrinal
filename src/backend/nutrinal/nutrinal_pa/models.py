@@ -175,4 +175,9 @@ class Order(models.Model):
     product = models.ManyToManyField(Product)
 
     def get_status(self):
+        """
+        Devuelve el estado del pedido.
+        El retorno puede ser Pendiente, Enviado, Entregado
+        y cancelado.
+        """
         return self.status
