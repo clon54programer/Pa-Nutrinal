@@ -126,3 +126,4 @@ class Order(models.Model):
     shipping_destination = models.CharField(max_length=200)
     seller = models.ForeignKey(Seller,on_delete=models.CASCADE)
     client = models.ForeignKey(Client,on_delete=models.CASCADE)
+    product = models.ManyToManyField(Product)
