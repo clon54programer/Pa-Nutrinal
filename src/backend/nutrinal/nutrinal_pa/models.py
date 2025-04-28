@@ -54,7 +54,7 @@ class Seller(models.Model):
     __name: str
         Es una cadena que almacena el nombre del vendedor.
         NOTE: Esta cadena solo debe almacenar letras.
-    _id: str
+    _identifier: str
         Es una cadena que almacena la tarjeta de identificacion del vendedor.
         NOTE: Solo debe almacena numeros enteros.
     _date_joined: DateField
@@ -63,7 +63,7 @@ class Seller(models.Model):
     """
 
     name = models.CharField(max_length=100)
-    id = models.CharField(max_length=20,unique=True)
+    identifier   = models.CharField(max_length=20,unique=True)
     date_joined =  models.DateField(auto_now_add=True)
 
     def get_orders(self):
