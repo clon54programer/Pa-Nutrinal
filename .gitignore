@@ -10,3 +10,7 @@ env/
 .env/
 build/
 PA_Nutrinal.egg-info/
+
+
+#Django
+*.sqlite3
