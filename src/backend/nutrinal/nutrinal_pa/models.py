@@ -66,6 +66,14 @@ class Seller(models.Model):
     id = models.CharField(max_length=20,unique=True)
     date_joined =  models.DateField(auto_now_add=True)
 
+    def get_orders(self):
+        """
+        Devuelve los pedidos que a gestionado
+        el cliente.
+        """
+        return Order.objects.filter(seller=self)
+
+
 class Product(models.Model):
     """
     Es una clase generica para representar los productos
