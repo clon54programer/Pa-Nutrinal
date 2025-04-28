@@ -73,7 +73,7 @@ class Product(models.Model):
         Es un numero entero que hace referencia al valor del producto.
     
     __description: str
-        Es una cadena que almacena la descripcion del producto
+        Es una cadena que almacena la descripcion del producto.
     """
     name_product = models.CharField(max_length=50)
     code = models.CharField(max_length=100,unique=True)
@@ -94,9 +94,14 @@ class Production(models.Model):
         cant_product: Integer
             Es un numero entero sin signo que almacena la cantidad
             disponible de un producto.    
+        
+        date_updated: DateTime
+            Es un fecha que registra la ultima actualizacion
+            de la producion.
     """
     product = models.ForeignKey(Product, on_delete=models.CASCADE)  
     cant_available = models.PositiveIntegerField()
+    date_updated = models.DateTimeField(auto_now=True)
 
 
 
