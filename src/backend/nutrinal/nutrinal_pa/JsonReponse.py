@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from enum import Enum
+#from django.core.serializers import serialize
 
 class StatusResponse(Enum):
     """
@@ -9,16 +10,21 @@ class StatusResponse(Enum):
     VALID = 0
     INVALID = -1
 
-class ResponseJson:
-    """
-    Es una clase para especificar una forma de
-    enviar una respuesta en formato json.
-    """
-    
 
-    def __init__(self,status: StatusResponse, data: dict[str,str]) -> None:
-        self.json_reponse = JsonResponse(data={"status":status,"data":data})
-        pass
+    def __str__(self) ->  str: 
+        if self.value == 0:
+            return "valid"
 
-    def get_reponse(self):
-        return self.json_reponse
+        return "invalid"
+        
+
+
+
+def ReponseJson(code_http: int, status: StatusResponse, data) -> JsonResponse:
+    data = {
+        "status":status.__str__(),
+        "code": code_http.__str__(),
+        "data": data
+    }
+
+    return JsonResponse(data=data)
