@@ -1,5 +1,5 @@
 from django.db import models
-
+#from django.core.validators import RegexValidator
 # Create your models here.
 class Client(models.Model):
     """
@@ -72,12 +72,36 @@ class Seller(models.Model):
         el cliente.
         """
         return Order.objects.filter(seller=self)
+    
+class SellerLogin(models.Model):
+    """
+    Es una clase que extiende la clase Seller
+    para permitir tener un registro del user.
+
+    Atributos
+    ---------
+    username: str
+        Es una cadena que almacena el nombre del usuario
+
+    password: str
+        Es una cadena que almacena una contraseña
+
+    identifier: LLave foranea
+        Es una clave foranea para identificar el proyecto.
+
+    """
+    identifier = models.OneToOneField(Seller, on_delete=models.CASCADE)
+    username = models.CharField(max_length=150,unique=True)
+    password = models.CharField(max_length=128)
 
 
 class Product(models.Model):
     """
     Es una clase generica para representar y describir los productos
     de nutrinal
+
+    TODO: Agregar un validador.
+        validators=[RegexValidator(r'^[a-zA-Z\s]+$', 'El nombre solo debe contener letras')]
 
     Atributos
     ---------
