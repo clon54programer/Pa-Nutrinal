@@ -28,3 +28,11 @@ def ReponseJson(code_http: int, status: StatusResponse, data) -> JsonResponse:
     }
 
     return JsonResponse(data=data)
+
+def ReponseJsonError(error: str, details: str,code_http: int = 400):
+    data = {
+    "error": error,
+    "details": details
+    }
+
+    return JsonResponse(data=data,status=code_http)
