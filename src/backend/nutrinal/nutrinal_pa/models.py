@@ -233,3 +233,24 @@ class Order(models.Model):
     def get_description(self) -> str:
         products = self.product.all().order_by("-name")
         return f"Status: {self.status} product: {products} destination: {self.shipping_destination} Client: {self.client.name} Seller: {self.seller.name} "
+
+class Admin(models.Model):
+    """
+    Es la representacion de un administrador de nutrinal.
+    Su rol en la aplicacion es crear y editar vendedores y
+    observar las ventas por clientes, producto y vendedor. Ademas
+    de poder administrar la producion.
+
+    Atributos
+    ---------
+
+    username: str
+        Es una cadena que almacena el nombre de usuario
+
+    password: str
+        Es una cadena que almacena una contraseña
+
+    """
+    username = models.CharField(max_length=120,unique=True)
+    password = models.CharField(max_length=128,unique=True)
+    
