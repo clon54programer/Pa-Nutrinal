@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
-from .JsonReponse import ResponseJson,StatusResponse
+from .JsonReponse import StatusResponse,ReponseJson
 
 # Create your views here.
 
@@ -20,15 +20,15 @@ def login(request,type_user: str):
 
     if type_user == "admin":
         #return HttpResponse(f"Bienvenido: {type_user}")
-        return ResponseJson(StatusResponse.VALID,{"data": f"Bienvenido {type_user}"}).get_reponse()
+        return ReponseJson(200,StatusResponse.VALID,f"Bienvenido: {type_user}")
     elif type_user == "client":
         #return HttpResponse(f"Bienvenido: {type_user}")
-        return ResponseJson(StatusResponse.VALID,{"data": f"Bienvenido {type_user}"}).get_reponse()
+        return ReponseJson(200,StatusResponse.VALID,f"Bienvenido: {type_user}")
     elif type_user == "seller":
         #return HttpResponse(f"Bienvenido: {type_user}")
-        return ResponseJson(StatusResponse.VALID,{"data": f"Bienvenido {type_user}"}).get_reponse()
+        return ReponseJson(200,StatusResponse.VALID,f"Bienvenido: {type_user}")
     #else:
     #    raise Http404("El tipo de usuario es invalido")
 
 
-    return ResponseJson(StatusResponse.INVALID,{"data": "No existe ese usuario"}).get_reponse()
+    return ReponseJson(404,StatusResponse.INVALID,f"Tipo de usuario invalido")
