@@ -35,8 +35,9 @@ def login(request,type_user: str):
 
 def create_seller_login(request):
     """
-    Esta funcion crea una entidad seller y luego la vincula
-    con una entidad seller login.
+    Recibi mediante de un metodo post del panel de administracion de
+    un admin, la informacion de una entidad de tipo seller y 
+    seller_login.
 
     Esta funcion recibe los siguiente datos:
         - name: str
