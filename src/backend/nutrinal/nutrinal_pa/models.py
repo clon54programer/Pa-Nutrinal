@@ -40,6 +40,28 @@ class Client(models.Model):
         el cliente.
         """
         return Order.objects.filter(client=self)
+    
+
+class ClientLogin(models.Model):
+    """
+    Es una clase que extiende la clase Client
+    para permitir tener un registro del user.
+
+    Atributos
+    ---------
+    username: str
+        Es una cadena que almacena el nombre del usuario
+
+    password: str
+        Es una cadena que almacena una contraseña
+
+    identifier: LLave foranea
+        Es una clave foranea para identificar el proyecto.
+
+    """
+    identifier = models.OneToOneField(Client, on_delete=models.CASCADE)
+    username = models.CharField(max_length=150)
+    password = models.CharField(max_length=128)
 
 
 class Seller(models.Model):
