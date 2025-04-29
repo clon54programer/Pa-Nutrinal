@@ -1,6 +1,10 @@
 from django.http import JsonResponse
 
 class ResponseJson:
+    """
+    Es una clase para especificar una forma de
+    enviar una respuesta en formato json.
+    """
     
 
     def __init__(self,status: str, data: dict[str,str]) -> None:
