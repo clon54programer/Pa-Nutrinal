@@ -1,4 +1,13 @@
 from django.http import JsonResponse
+from enum import Enum
+
+class StatusResponse(Enum):
+    """
+    Es un enum que contiene los estado
+    de una peticion jsonn.
+    """
+    VALID = 0
+    INVALID = -1
 
 class ResponseJson:
     """
@@ -7,7 +16,7 @@ class ResponseJson:
     """
     
 
-    def __init__(self,status: str, data: dict[str,str]) -> None:
+    def __init__(self,status: StatusResponse, data: dict[str,str]) -> None:
         self.json_reponse = JsonResponse(data={"status":status,"data":data})
         pass
 
