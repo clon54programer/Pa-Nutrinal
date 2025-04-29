@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse,Http404
+from django.http import HttpResponse,JsonResponse
 
 # Create your views here.
 
@@ -8,6 +8,14 @@ def index(request):
 
 
 def login(request,type_user: str):
+
+    
+
+    # Estructura de la respuesta en json
+    # Un campo llamado, status,
+    # que puede te valor valid y invalid.
+    # Despues tiene un campo llamado,
+    # data, que se almacenara la informacion
 
     if type_user == "admin":
         return HttpResponse(f"Bienvenido: {type_user}")
@@ -19,4 +27,4 @@ def login(request,type_user: str):
     #    raise Http404("El tipo de usuario es invalido")
 
 
-    raise Http404("El tipo de usuario es invalido")
+    return JsonResponse(data="s")
