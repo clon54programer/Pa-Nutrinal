@@ -15,6 +15,8 @@ def login(request,type_user: str):
         return HttpResponse(f"Bienvenido: {type_user}")
     elif type_user == "seller":
         return HttpResponse(f"Bienvenido: {type_user}")
+    #else:
+    #    raise Http404("El tipo de usuario es invalido")
 
 
-    return Http404("Tipo de usuario invalido")
+    raise Http404("El tipo de usuario es invalido")
