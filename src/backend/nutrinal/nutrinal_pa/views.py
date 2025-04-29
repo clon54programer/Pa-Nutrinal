@@ -19,16 +19,31 @@ def login(request,type_user: str):
     # data, que se almacenara la informacion
 
     if type_user == "admin":
-        #return HttpResponse(f"Bienvenido: {type_user}")
+        
         return ReponseJson(200,StatusResponse.VALID,f"Bienvenido: {type_user}")
     elif type_user == "client":
-        #return HttpResponse(f"Bienvenido: {type_user}")
+        
         return ReponseJson(200,StatusResponse.VALID,f"Bienvenido: {type_user}")
     elif type_user == "seller":
-        #return HttpResponse(f"Bienvenido: {type_user}")
+        
         return ReponseJson(200,StatusResponse.VALID,f"Bienvenido: {type_user}")
     #else:
     #    raise Http404("El tipo de usuario es invalido")
 
 
     return ReponseJson(404,StatusResponse.INVALID,f"Tipo de usuario invalido")
+
+def create_seller_login(request):
+    """
+    Esta funcion crea una entidad seller y luego la vincula
+    con una entidad seller login.
+
+    Esta funcion recibe los siguiente datos:
+        - name: str
+        - id: str
+        - username: str
+        - password: str
+    NOTE: data_joined, debe ser asignado al momento de recibir la 
+        solicitud.
+
+    """
