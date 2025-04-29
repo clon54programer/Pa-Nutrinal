@@ -253,4 +253,8 @@ class Admin(models.Model):
     """
     username = models.CharField(max_length=120,unique=True)
     password = models.CharField(max_length=128,unique=True)
+
+    def __str__(self) -> str:
+        return f"username: {self.username}"
+
     
