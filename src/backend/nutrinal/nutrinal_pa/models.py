@@ -56,7 +56,7 @@ class ClientLogin(models.Model):
         Es una cadena que almacena una contraseña
 
     identifier: LLave foranea
-        Es una clave foranea para identificar el proyecto.
+        Es una clave foranea para identificar el cliente.
 
     """
     identifier = models.OneToOneField(Client, on_delete=models.CASCADE)
@@ -109,7 +109,7 @@ class SellerLogin(models.Model):
         Es una cadena que almacena una contraseña
 
     identifier: LLave foranea
-        Es una clave foranea para identificar el proyecto.
+        Es una clave foranea para identificar el vendedor.
 
     """
     identifier = models.OneToOneField(Seller, on_delete=models.CASCADE)
