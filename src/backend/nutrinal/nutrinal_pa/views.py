@@ -50,6 +50,9 @@ def create_seller_login(request: HttpRequest):
         solicitud.
     """
 
+    if request.method == "GET":
+        return ReponseJsonError("Falta de permiso", "No tienen permiso para realizar la accion.", 401)
+
     if request.method == "POST":
         name_seller = request.POST.get("name")
         id_seller = request.POST.get("id")
@@ -62,9 +65,6 @@ def create_seller_login(request: HttpRequest):
             if ValidRequest.is_valid(iter) != True:
                 message = f"Falta el parametro: {type(iter).__name__}"
                 return ReponseJsonError("Faltan parametros a la solicitud", details=message)
-
-    # else:
-    #    return ReponseJsonError("Falta de permiso", "No tienen permiso para realizar la accion.", 401)
 
     content = {
         "message": "El usuario ha sido creado exitosamente"
