@@ -108,3 +108,17 @@ class TestCreateSeller(TestCase):
         }
 
         missing_data = {}
+
+        url_post = "http://127.0.0.1:8000/nutrinal_pa/admin/create_seller_login"
+
+        lista = [missing_id, missing_data, missing_name,
+                 missing_username, missing_password]
+
+        for json in lista:
+            r = requests.post(
+                url_post, json=json)
+            content = r.json()
+
+            print("status code: ", r.status_code)
+            print("mesage", content['data']['error'])
+            print("mesage", content['data']['details'])
