@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse, HttpRequest
 from .JsonReponse import StatusResponse, ReponseJson, ReponseJsonError
 
 from django.views.decorators.csrf import csrf_exempt  # para evitar errores
+import json
 
 from . import ValidRequest
 
@@ -54,17 +55,11 @@ def create_seller_login(request: HttpRequest):
         return ReponseJsonError("Falta de permiso", "No tienen permiso para realizar la accion.", 401)
 
     if request.method == "POST":
-        name_seller = request.POST.get("name")
-        id_seller = request.POST.get("id")
-        username_seller = request.POST.get("username")
-        password_seller = request.POST.get("password")
-
-        data = [name_seller, id_seller, username_seller, password_seller]
-
-        for iter in data:
-            if ValidRequest.is_valid(iter) != True:
-                message = f"Falta el parametro: {type(iter).__name__}"
-                return ReponseJsonError("Faltan parametros a la solicitud", details=message)
+        # data = json.loads(request.body)
+        try:
+            json_data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return ReponseJsonError("Error de formato", "El json recibido no sigue el estandar habitual", 400)
 
     content = {
         "message": "El usuario ha sido creado exitosamente"
