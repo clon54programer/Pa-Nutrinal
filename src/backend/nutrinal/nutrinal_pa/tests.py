@@ -40,6 +40,9 @@ class TestViewLogin(TestCase):
 
         for iter in route_invalid:
             r = requests.get(iter)
+            content = r.json()
+
+            print(f"Content: {content['data']}")
 
             self.assertEqual(404, r.status_code,
                              "El codigo http de repuesta es diferent a 404")
