@@ -143,3 +143,67 @@ class TestCreateSeller(TestCase):
             print("Detalles", content['data']['details'])
             self.assertEqual(400, r.status_code,
                              "El codigo http no es igual a 400")
+
+
+class ViewMakeProduct(TestCase):
+
+    def test_post_data():
+        content = {"data": {
+            "name": "Producto Ejemplo",
+            "code": "P12345",
+            "price": 1000.50,
+            "description": "Este es un producto de prueba"
+        }}
+
+        url_post = "http://127.0.0.1:8000/nutrinal_pa/admin/make_product"
+        print("")
+
+    def test_missing_field(self):
+        url_post = "http://127.0.0.1:8000/nutrinal_pa/admin/make_product"
+
+        missing_code = {
+            "data": {
+                "name": "Producto Ejemplo",
+                "price": 1000.50,
+                "description": "Este es un producto de prueba"
+            }
+        }
+
+        missing_price = {
+            "data": {
+                "name": "Producto Ejemplo",
+                "code": "P12345",
+                "description": "Este es un producto de prueba"
+            }
+        }
+
+        missing_name = {"data": {
+            "code": "P12345",
+            "price": 1000.50,
+            "description": "Este es un producto de prueba"
+        }
+        }
+
+        missing_description = {
+            "data": {
+                "name": "Producto Ejemplo",
+                "code": "P12345",
+                "price": 1000.50
+            }
+        }
+
+        missing_data = {}
+
+        list_missing = [missing_name, missing_code,
+                        missing_description, missing_price, missing_data]
+
+        for field in list_missing:
+            r = requests.post(url_post, json=field)
+            content = r.json()
+
+            print("status code: ", r.status_code)
+            print("error: ", content['data']['error'])
+            print("error: ", content['data']['details'])
+
+            self.assertEqual(400, r.status_code,
+                             "El codigo http es diferente a 400")
