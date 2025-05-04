@@ -10,5 +10,6 @@ urlpatterns = [
     path("create_default_data", views.create_default_data,
          name="create_default_data"),
     path("admin/get_seller", views.get_seller, name="get_seller"),
-    path("admin/get_seller_login", views.get_seller_login, name="get_seller_login")
+    path("admin/get_seller_login", views.get_seller_login, name="get_seller_login"),
+    path("admin/make_product", views.make_product, name="make_product")
 ]
