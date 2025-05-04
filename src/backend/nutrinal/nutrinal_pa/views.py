@@ -177,6 +177,7 @@ def get_seller_login(request: HttpRequest):
     return ReponseJson(200, StatusResponse.VALID, data)
 
 
+@csrf_exempt
 def make_product(request: HttpRequest):
     """
     Crea un producto, mediante el metodo post.
@@ -200,7 +201,7 @@ def make_product(request: HttpRequest):
 
     try:
         json_data = json.loads(request.body)
-        fields_missing = ["data", "code", "price", "description"]
+        fields_missing = ["name", "code", "price", "description"]
 
         if "data" in json_data:
             return ReponseJsonError("Falta un campo", "El campo data falta en el json")
