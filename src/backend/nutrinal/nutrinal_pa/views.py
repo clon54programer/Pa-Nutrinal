@@ -55,9 +55,17 @@ def create_seller_login(request: HttpRequest):
         return ReponseJsonError("Falta de permiso", "No tienen permiso para realizar la accion.", 401)
 
     if request.method == "POST":
-        # data = json.loads(request.body)
         try:
             json_data = json.loads(request.body)
+            fields = ['data', 'name', 'id', 'username', 'password']
+
+            for field in fields:
+                if field in json_data:
+                    print("Datos recibidos")
+                    print("json: ", json)
+                else:
+                    return ReponseJsonError("Falta un campo", f"El campo {field} no esta incluido en json")
+
         except json.JSONDecodeError:
             return ReponseJsonError("Error de formato", "El json recibido no sigue el estandar habitual", 400)
 
