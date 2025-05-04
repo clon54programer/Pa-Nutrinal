@@ -60,11 +60,11 @@ def create_seller_login(request: HttpRequest):
                 message = f"Falta el parametro: {type(iter).__name__}"
                 return ReponseJsonError("Faltan parametros a la solicitud", details=message)
 
-    else:
-        return ReponseJsonError("Falta de permiso", "No tienen permiso para realizar la accion.", 401)
+    # else:
+    #    return ReponseJsonError("Falta de permiso", "No tienen permiso para realizar la accion.", 401)
 
     content = {
         "message": "El usuario ha sido creado exitosamente"
     }
 
-    return ReponseJson(200, StatusResponse.VALID, content)
+    return ReponseJson(200, StatusResponse.VALID, json_body=content)
