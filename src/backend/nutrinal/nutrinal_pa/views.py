@@ -61,6 +61,6 @@ def create_seller_login(request: HttpRequest):
                 return ReponseJsonError("Falto enviar un dato", details=message)
 
     else:
-        return HttpResponse("Error")
+        return ReponseJsonError("Falta de permiso", "No tienen permiso para realizar la accion.", 401)
 
     return HttpResponse("Create")
