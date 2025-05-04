@@ -17,7 +17,7 @@ def create_default_data(request: HttpRequest):
     Crea datos por default para realizar pruebas.
     """
     if Admin.objects.filter(username="admin_nutrinal").exists():
-        return ReponseJsonError(400, "Redundancia de datos", "Esta ruta ya ha creado los datos por default")
+        return ReponseJsonError("Redundancia de datos", "Esta ruta ya ha creado los datos por default", 400)
 
     # Crear un administrador
     admin = Admin.objects.create(
