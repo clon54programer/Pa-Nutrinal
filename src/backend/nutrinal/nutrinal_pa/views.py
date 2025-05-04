@@ -139,6 +139,8 @@ def create_seller_login(request: HttpRequest):
     return ReponseJson(200, StatusResponse.VALID, json_body=content)
 
 
+# --------vista para los administradores--------#
+
 def get_seller(request: HttpRequest):
 
     sellers = Seller.objects.all()
@@ -173,3 +175,40 @@ def get_seller_login(request: HttpRequest):
         index += 1
 
     return ReponseJson(200, StatusResponse.VALID, data)
+
+
+def make_product(request: HttpRequest):
+    """
+    Crea un producto, mediante el metodo post.
+    La peticion post debe contener la siguiente informacion 
+    en formato json:
+
+    {
+    "data": {
+    "name" : exampel,
+    "code": "12222"
+    "price": 1000.50,
+    "description": "Este es un producto de prueba",
+    }
+    }
+
+
+    """
+    """
+    product = Product.objects.create(
+        name="Producto Ejemplo",
+        code="P12345",
+        price=1000.50,
+        description="Este es un producto de prueba"
+    )
+
+    production = Production.objects.create(
+        product=product,
+        cant_available=150  # Cantidad disponible
+    )
+    """
+
+    return HttpResponse("ee")
+
+
+# ----------------------------------------------#
