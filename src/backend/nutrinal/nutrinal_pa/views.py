@@ -203,14 +203,14 @@ def make_product(request: HttpRequest):
         json_data = json.loads(request.body)
         fields_missing = ["name", "code", "price", "description"]
 
-        if "data" in json_data:
+        if "data" not in json_data:
             return ReponseJsonError("Falta un campo", "El campo data falta en el json")
 
         data = json_data['data']
 
         for field in fields_missing:
             for iter in data:
-                if iter not in iter:
+                if iter not in field:
                     return ReponseJsonError("Falta un campo", f"falta el campo {iter} en el json", 400)
 
         name = data['name']
