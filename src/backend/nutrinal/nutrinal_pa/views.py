@@ -59,10 +59,11 @@ def create_seller_login(request: HttpRequest):
         try:
             json_data = json.loads(request.body)
             fields = ['name', 'id', 'username', 'password']
-            data = json_data['data']
 
             if "data" not in json_data:
                 return ReponseJsonError("Falta un campo", "El campo data no esta incluido en json")
+
+            data = json_data['data']
 
             for field in fields:
                 if field not in data:
@@ -71,9 +72,16 @@ def create_seller_login(request: HttpRequest):
             print("Json Recibido exitosamente")
             print("data: ", json_data['data'])
 
-            # Insertando informacion en la base de datos
             name = data['name']
             id = data['id']
+
+            if Seller.objects.filter(id=id).exists():
+                return ReponseJsonError("Dato redundante", f'El id recibido ya existe en la base de datos')
+            if Seller.objects.filter(name=name).exists():
+                return ReponseJsonError("Dato redundante", f'El name recibido ya existe en la base de datos')
+
+            # Insertando informacion en la base de datos
+
             seller = Seller.objects.create(name=name, identifier=id)
 
             user_name = data['username']
