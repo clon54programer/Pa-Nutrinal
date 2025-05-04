@@ -214,20 +214,25 @@ def make_product(request: HttpRequest):
 
         name = data['name']
         code = data['code']
-        price = float(data['price'])
+        # price = float(data['price'])
         description = data['description']
+
+        try:
+            price = float(data["price"])
+        except ValueError:
+            return ResponseJsonError("Formato incorrecto", "El campo price debe ser un número válido", 400)
 
         if Product.objects.filter(name=name).exists():
             return ReponseJsonError("Datos redundantes", "El campo name ya existe en la base de datos")
 
         if Product.objects.filter(code=code).exists():
-            return ReponseJsonError("Datos redundantes", "El campo id ya existe en la base de datos")
+            return ReponseJsonError("Datos redundantes", "El campo code ya existe en la base de datos")
 
         product = Product.objects.create(
             name=name, code=code, price=price, description=description)
 
         production = Production.objects.create(
-            product=product, cant_avaible=150)
+            product=product, cant_available=150)
 
     except json.JSONDecodeError:
         return ReponseJsonError("Error de formato", "El json recibido no sigue el estandar habitual", 400)
