@@ -1,6 +1,8 @@
 from django.db import models
-#from django.core.validators import RegexValidator
+# from django.core.validators import RegexValidator
 # Create your models here.
+
+
 class Client(models.Model):
     """
     Es una abstracion de un cliente de nutrinal,
@@ -15,15 +17,15 @@ class Client(models.Model):
     __name: str
         Es una cadena que almacena un nombre de una persona
         natural o de una organizacion.
-    
+
     __email: str
         Es una cadena que almacena el correo de la persona
         o organizacion.
-    
+
     __phone_number: str
         Es una cadena que almacena un numero de telefono.
         NOTE: Esta cadena solo puede tener numeros en ella.
-    
+
     __identifier: str
         Es un cadena que almacena un identificador del cliente.
     """
@@ -33,14 +35,13 @@ class Client(models.Model):
     phone_number = models.CharField(max_length=15)
     identifier = models.CharField(max_length=50, unique=True)
 
-
     def get_orders(self):
         """
         Devuelve los pedidos que a ordenado
         el cliente.
         """
         return Order.objects.filter(client=self)
-    
+
 
 class ClientLogin(models.Model):
     """
@@ -68,7 +69,7 @@ class Seller(models.Model):
     """
     Es una clase que representa a  un
     vendedor de nutrinal.
-    
+
 
     Atributos
     ---------
@@ -81,12 +82,12 @@ class Seller(models.Model):
         NOTE: Solo debe almacena numeros enteros.
     _date_joined: DateField
         Es un campo que almacena la fecha de incorporacion del sistema.
-        
+
     """
 
     name = models.CharField(max_length=100)
-    identifier   = models.CharField(max_length=20,unique=True)
-    date_joined =  models.DateField(auto_now_add=True)
+    identifier = models.CharField(max_length=20, unique=True)
+    date_joined = models.DateField(auto_now_add=True)
 
     def get_orders(self):
         """
@@ -94,7 +95,11 @@ class Seller(models.Model):
         el cliente.
         """
         return Order.objects.filter(seller=self)
-    
+
+    def __str__(self):
+        return f"name: {self.name} identifier: {self.identifier} date_joined: {self.date_joined}"
+
+
 class SellerLogin(models.Model):
     """
     Es una clase que extiende la clase Seller
@@ -113,7 +118,7 @@ class SellerLogin(models.Model):
 
     """
     identifier = models.OneToOneField(Seller, on_delete=models.CASCADE)
-    username = models.CharField(max_length=150,unique=True)
+    username = models.CharField(max_length=150, unique=True)
     password = models.CharField(max_length=128)
 
 
@@ -127,24 +132,25 @@ class Product(models.Model):
 
     Atributos
     ---------
-    
+
     __name: str
         Es una cadena que almacena el nombre de un producto
-    
+
     __code: int
         Es un numero entero que identifica el producto.
         Su funcion es facilitar la busqueda de un produto.
-    
+
     __price: int
         Es un numero entero que hace referencia al valor del producto.
-    
+
     __description: str
         Es una cadena que almacena la descripcion del producto.
     """
     name = models.CharField(max_length=50)
-    code = models.CharField(max_length=100,unique=True)
-    price = models.DecimalField(max_digits=15,decimal_places=2)
+    code = models.CharField(max_length=100, unique=True)
+    price = models.DecimalField(max_digits=15, decimal_places=2)
     description = models.TextField()
+
 
 class Production(models.Model):
     """
@@ -156,16 +162,16 @@ class Production(models.Model):
         product: llave foranea
             Es una llave foranea que identifica la relacion
             entre el producto y la producion
-        
+
         cant_product: Integer
             Es un numero entero sin signo que almacena la cantidad
             disponible de un producto.    
-        
+
         date_updated: DateTime
             Es un fecha que registra la ultima actualizacion
             de la producion.
     """
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)  
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     cant_available = models.PositiveIntegerField()
     date_updated = models.DateTimeField(auto_now=True)
 
@@ -174,7 +180,6 @@ class Production(models.Model):
         Devuelve un true si hay disponibilidad de un producto.
         """
         return self.cant_available > 0
-
 
 
 class Order(models.Model):
@@ -212,14 +217,14 @@ class Order(models.Model):
     """
     cant_product = models.BigIntegerField(default=0)
     status = models.CharField(max_length=50, choices=[
-    ("pending", "Pendiente"),
-    ("shipped", "Enviado"),
-    ("delivered", "Entregado"),
-    ("cancelled", "Cancelado")
-], default="pending")
+        ("pending", "Pendiente"),
+        ("shipped", "Enviado"),
+        ("delivered", "Entregado"),
+        ("cancelled", "Cancelado")
+    ], default="pending")
     shipping_destination = models.CharField(max_length=200)
-    seller = models.ForeignKey(Seller,on_delete=models.CASCADE)
-    client = models.ForeignKey(Client,on_delete=models.CASCADE)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
     product = models.ManyToManyField(Product)
 
     def get_status(self):
@@ -233,6 +238,7 @@ class Order(models.Model):
     def get_description(self) -> str:
         products = self.product.all().order_by("-name")
         return f"Status: {self.status} product: {products} destination: {self.shipping_destination} Client: {self.client.name} Seller: {self.seller.name} "
+
 
 class Admin(models.Model):
     """
@@ -251,10 +257,8 @@ class Admin(models.Model):
         Es una cadena que almacena una contraseña
 
     """
-    username = models.CharField(max_length=120,unique=True)
-    password = models.CharField(max_length=128,unique=True)
+    username = models.CharField(max_length=120, unique=True)
+    password = models.CharField(max_length=128, unique=True)
 
     def __str__(self) -> str:
         return f"username: {self.username}"
-
-    
