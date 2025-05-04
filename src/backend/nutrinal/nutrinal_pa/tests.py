@@ -48,7 +48,28 @@ class TestViewLogin(TestCase):
 class TestCreateSeller(TestCase):
 
     def test_post_data(self):
-        json = {}
+        json = {"data": {
+            "name": "juan",
+            "id": "12345678",
+            "username": "seller_1",
+            "password": "12345678"
+        }}
+
+        url_post = "http://127.0.0.1:8000/nutrinal_pa/admin/create_seller_login"
 
         r = requests.post(
-            "http://127.0.0.1:8000/nutrinal_pa/create_seller_login", js)
+            url_post, json=json)
+
+        print("status code: ", r.status_code)
+        # print("json: ", r.json())
+
+    def test_get_data(self):
+        url_get = "http://127.0.0.1:8000/nutrinal_pa/admin/create_seller_login"
+
+        r = requests.get(url_get)
+        print(r.headers.get("Content-Type"))
+
+        content = r.json()
+
+        print("status code: ", r.status_code)
+        print("json", content['data'])
