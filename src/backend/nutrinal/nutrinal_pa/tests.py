@@ -2,6 +2,7 @@ from django.test import TestCase
 import requests
 
 from .JsonReponse import ReponseJson, StatusResponse
+import json
 
 
 class TestViewLogin(TestCase):
@@ -14,13 +15,20 @@ class TestViewLogin(TestCase):
             "http://127.0.0.1:8000/nutrinal_pa/login/admin"
         ]
 
+        message_valid = [
+            "Bienvenido: client",
+            "Bienvenido: seller",
+            "Bienvenido: admin"
+        ]
+
         for iter in routes_valid:
             r = requests.get(iter)
+            content = r.json()
+
+            print(f"Content: {content['data']['message']}")
 
             self.assertEqual(200, r.status_code,
                              "El codigo http de respuesta es diferente a 200")
-
-            print(r.text)
 
     def test_invalid_response(self):
 
