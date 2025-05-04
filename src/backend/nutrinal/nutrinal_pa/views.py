@@ -137,3 +137,21 @@ def create_seller_login(request: HttpRequest):
     }
 
     return ReponseJson(200, StatusResponse.VALID, json_body=content)
+
+
+def get_seller(request: HttpRequest):
+
+    sellers = Seller.objects.all()
+
+    data = {}
+
+    index = 0
+    for seller in sellers:
+        data[f"seller_{index}"] = {
+            "name": seller.name,
+            "identifier": seller.identifier,
+            "data_joined": seller.date_joined
+        }
+        index += 1
+
+    return ReponseJson(200, StatusResponse.VALID, data)
