@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpRequest
 from .JsonReponse import StatusResponse, ReponseJson, ReponseJsonError
 
+from django.views.decorators.csrf import csrf_exempt  # para evitar errores
+
 from . import ValidRequest
 
 # Create your views here.
@@ -32,6 +34,7 @@ def login(request, type_user: str):
     return ReponseJsonError("Tipo de usuario invalido", "La ruta no contiene un tipo de usuario iqual a seller, admin o client", 404)
 
 
+@csrf_exempt
 def create_seller_login(request: HttpRequest):
     """
     Recibi mediante de un metodo post del panel de administracion de
