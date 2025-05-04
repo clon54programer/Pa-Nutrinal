@@ -4,6 +4,7 @@ from .JsonReponse import StatusResponse, ReponseJson, ReponseJsonError
 
 from django.views.decorators.csrf import csrf_exempt  # para evitar errores
 import json
+from .models import Seller, SellerLogin
 
 from . import ValidRequest
 
@@ -69,6 +70,17 @@ def create_seller_login(request: HttpRequest):
 
             print("Json Recibido exitosamente")
             print("data: ", json_data['data'])
+
+            # Insertando informacion en la base de datos
+            name = data['name']
+            id = data['id']
+            seller = Seller.objects.create(name=name, identifier=id)
+
+            user_name = data['username']
+            password = data['password']
+
+            SellerLogin.objects.create(
+                identifier=seller, username=user_name, password=password)
 
         except json.JSONDecodeError:
             return ReponseJsonError("Error de formato", "El json recibido no sigue el estandar habitual", 400)
