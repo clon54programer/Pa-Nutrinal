@@ -1,26 +1,21 @@
-from django.test import TestCase, Client
-from django.http import Http404
+from django.test import TestCase
 import requests
 
-from .JsonReponse import ReponseJson,StatusResponse
+from .JsonReponse import ReponseJson, StatusResponse
 
-class ViewCreateSellerLogin(TestCase):
 
-    def create_seller(self):
-        route = "http://127.0.0.1:8000/nutrinal_pa/admin/create_seller_login"
+class TestViewLogin(TestCase):
 
-        seller_data = {"name": "Juan",
-                       "id": "1234567",
-                       "username": "seller_1",
-                       "password": "12345678"
-                       }
+    def test_valid_reponse():
 
-        data = ReponseJson(200,StatusResponse.VALID,seller_data)
+        routes_valid = [
+            "http://127.0.0.1:8000/nutrinal_pa/login/client",
+            "http://127.0.0.1:8000/nutrinal_pa/login/seller",
+            "http://127.0.0.1:8000/nutrinal_pa/login/admin"
+        ]
 
-        response = requests.post(route, data=data)
-
-        error = response.json()
-
-        print(error)
-
-        self.assertEquals(True,True)
+        route_invalid = [
+            "http://127.0.0.1:8000/nutrinal_pa/login/body",
+            "http://127.0.0.1:8000/nutrinal_pa/login/ed",
+            "http://127.0.0.1:8000/nutrinal_pa/login/bee",
+        ]
