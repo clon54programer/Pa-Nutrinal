@@ -61,7 +61,7 @@ class TestCreateSeller(TestCase):
             url_post, json=json)
 
         print("status code: ", r.status_code)
-        # print("json: ", r.json())
+        print("json: ", r.json())
 
     def test_get_data(self):
         url_get = "http://127.0.0.1:8000/nutrinal_pa/admin/create_seller_login"
@@ -73,3 +73,38 @@ class TestCreateSeller(TestCase):
 
         print("status code: ", r.status_code)
         print("json", content['data'])
+
+    def test_missing_field():
+        missing_name = {
+            "data": {
+                "id": "12345",
+                "username": "carlos_user",
+                "password": "securepass123"
+            }
+        }
+
+        missing_id = {
+            "data": {
+                "name": "Carlos",
+                "username": "carlos_user",
+                "password": "securepass123"
+            }
+        }
+
+        missing_username = {
+            "data": {
+                "name": "Carlos",
+                "id": "12345",
+                "password": "securepass123"
+            }
+        }
+
+        missing_password = {
+            "data": {
+                "name": "Carlos",
+                "id": "12345",
+                "username": "carlos_user"
+            }
+        }
+
+        missing_data = {}
