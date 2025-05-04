@@ -21,7 +21,7 @@ class StatusResponse(Enum):
 def ReponseJson(code_http: int, status: StatusResponse, json_body: dict[str, str | int]) -> JsonResponse:
     data = {
         "status": status.__str__(),
-        "code": code_http.__str__(),
+        "code": code_http,
         "data": json_body
     }
 
@@ -30,8 +30,12 @@ def ReponseJson(code_http: int, status: StatusResponse, json_body: dict[str, str
 
 def ReponseJsonError(error: str, details: str, code_http: int = 400):
     data = {
-        "error": error,
-        "details": details
+        "status": StatusResponse.INVALID.__str__(),
+        "code": code_http,
+        "data": {
+            "error": error,
+            "details": details
+        }
     }
 
     return JsonResponse(data=data, status=code_http)
