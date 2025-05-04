@@ -8,5 +8,7 @@ urlpatterns = [
     path("admin/create_seller_login",
          views.create_seller_login, name="create_seller_login"),
     path("create_default_data", views.create_default_data,
-         name="create_default_data")
+         name="create_default_data"),
+    path("get_seller", views.get_seller, name="get_seller"),
+    path("get_seller_login", views.get_seller_login, name="get_seller_login")
 ]
