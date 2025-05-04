@@ -63,6 +63,8 @@ class TestCreateSeller(TestCase):
         print("status code: ", r.status_code)
         print("json: ", r.json())
 
+        self.assertEqual(200, r.status_code, "El codigo http no es igual 200")
+
     def test_get_data(self):
         url_get = "http://127.0.0.1:8000/nutrinal_pa/admin/create_seller_login"
 
