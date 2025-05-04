@@ -8,6 +8,7 @@ __pycache__/
 venv/
 env/
 .env/
+.venv/
 build/
 PA_Nutrinal.egg-info/
 
