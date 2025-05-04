@@ -66,6 +66,9 @@ def create_seller_login(request: HttpRequest):
                 if field not in json_data:
                     return ReponseJsonError("Falta un campo", f"El campo {field} no esta incluido en json")
 
+            print("Json Recibido exitosamente")
+            print("data: ", json_data['data'])
+
         except json.JSONDecodeError:
             return ReponseJsonError("Error de formato", "El json recibido no sigue el estandar habitual", 400)
 
