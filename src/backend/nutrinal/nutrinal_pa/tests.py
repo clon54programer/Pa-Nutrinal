@@ -74,7 +74,7 @@ class TestCreateSeller(TestCase):
         print("status code: ", r.status_code)
         print("json", content['data'])
 
-    def test_missing_field():
+    def test_missing_field(self):
         missing_name = {
             "data": {
                 "id": "12345",
@@ -120,5 +120,5 @@ class TestCreateSeller(TestCase):
             content = r.json()
 
             print("status code: ", r.status_code)
-            print("mesage", content['data']['error'])
-            print("mesage", content['data']['details'])
+            print("Error: ", content['data']['error'])
+            print("Detalles", content['data']['details'])
