@@ -4,18 +4,53 @@ from .JsonReponse import StatusResponse, ReponseJson, ReponseJsonError
 
 from django.views.decorators.csrf import csrf_exempt  # para evitar errores
 import json
-from .models import Seller, SellerLogin
+from .models import Seller, SellerLogin, Client, ClientLogin, Order, Product, Production, Admin
+from django.db.models import Model
 
 from . import ValidRequest
 
 # Create your views here.
 
 
+def create_default_data(request: HttpRequest):
+    """
+    Crea datos por default para realizar pruebas.
+    """
+
+    # Crear un administrador
+    admin = Admin.objects.create(
+        username="admin_nutrinal", password="adminpass123")
+
+    # Crear dos vendedores
+    seller1 = Seller.objects.create(name="Juan Pérez", identifier="123456")
+    seller2 = Seller.objects.create(name="Ana Gómez", identifier="654321")
+
+    # Crear un cliente
+    client = Client.objects.create(
+        name="Carlos Rodríguez", email="carlos@example.com", phone_number="1234567890", identifier="CLT001")
+
+    # Crear un producto
+    product = Product.objects.create(name="Suplemento Nutricional", code="PROD001",
+                                     price=49.99, description="Mejora la salud y el bienestar.")
+
+    # Crear una producción para el producto
+    production = Production.objects.create(product=product, cant_available=100)
+
+    # Crear registros de acceso para el vendedor y el cliente
+    seller_login1 = SellerLogin.objects.create(
+        identifier=seller1, username="juan_vendedor", password="securepass")
+
+    seller_login2 = SellerLogin.objects.create(
+        identifier=seller2, username="ana_vendedora", password="securepass")
+    client_login = ClientLogin.objects.create(
+        identifier=client, username="carlos_cliente", password="clientpass")
+
+
 def index(request):
     return HttpResponse("Bienvenido a nutrinal")
 
 
-def login(request, type_user: str):
+def login(request: HttpRequest, type_user: str):
 
     # Estructura de la respuesta en json
     # Un campo llamado, status,
