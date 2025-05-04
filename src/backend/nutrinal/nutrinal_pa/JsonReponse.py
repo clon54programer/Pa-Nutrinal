@@ -18,7 +18,7 @@ class StatusResponse(Enum):
         return "invalid"
 
 
-def ReponseJson(code_http: int, status: StatusResponse, json_body: dict[str, str | int]) -> JsonResponse:
+def ReponseJson(code_http: int, status: StatusResponse, json_body: dict[str, str]) -> JsonResponse:
     data = {
         "status": status.__str__(),
         "code": code_http,
