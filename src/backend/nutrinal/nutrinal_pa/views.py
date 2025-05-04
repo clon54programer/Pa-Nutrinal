@@ -217,10 +217,10 @@ def make_product(request: HttpRequest):
         price = data['price']
         description = data['description']
 
-        if Product.objects.exists(name=name):
+        if Product.objects.filter(name=name).exists():
             return ReponseJsonError("Datos redundantes", "El campo name ya existe en la base de datos")
 
-        if Product.objects.exists(id=id):
+        if Product.objects.filter(id=id).exists():
             return ReponseJsonError("Datos redundantes", "El campo id ya existe en la base de datos")
 
         product = Product.objects.create(
