@@ -115,9 +115,9 @@ def create_seller_login(request: HttpRequest):
             id = data['id']
 
             if Seller.objects.filter(id=id).exists():
-                return ReponseJsonError("Dato redundante", f'El id recibido ya existe en la base de datos')
+                return ReponseJsonError("Dato redundante", f'El id recibido ya existe en la base de datos', 400)
             if Seller.objects.filter(name=name).exists():
-                return ReponseJsonError("Dato redundante", f'El name recibido ya existe en la base de datos')
+                return ReponseJsonError("Dato redundante", f'El name recibido ya existe en la base de datos', 400)
 
             # Insertando informacion en la base de datos
 
@@ -181,7 +181,7 @@ def get_seller_login(request: HttpRequest):
 def make_product(request: HttpRequest):
     """
     Crea un producto, mediante el metodo post.
-    La peticion post debe contener la siguiente informacion 
+    La peticion post debe contener la siguiente informacion
     en formato json:
 
     {
@@ -209,26 +209,25 @@ def make_product(request: HttpRequest):
         data = json_data['data']
 
         for field in fields_missing:
-            for iter in data:
-                if iter not in field:
-                    return ReponseJsonError("Falta un campo", f"falta el campo {iter} en el json", 400)
+            if field not in data:
+                return ReponseJsonError("Falta un campo", f"falta el campo {iter} en el json", 400)
 
         name = data['name']
         code = data['code']
-        price = data['price']
+        price = float(data['price'])
         description = data['description']
 
         if Product.objects.filter(name=name).exists():
             return ReponseJsonError("Datos redundantes", "El campo name ya existe en la base de datos")
 
-        if Product.objects.filter(id=id).exists():
+        if Product.objects.filter(code=code).exists():
             return ReponseJsonError("Datos redundantes", "El campo id ya existe en la base de datos")
 
         product = Product.objects.create(
             name=name, code=code, price=price, description=description)
 
         production = Production.objects.create(
-            product=product, cant_Avaible=150)
+            product=product, cant_avaible=150)
 
     except json.JSONDecodeError:
         return ReponseJsonError("Error de formato", "El json recibido no sigue el estandar habitual", 400)
@@ -247,7 +246,7 @@ def make_product(request: HttpRequest):
     )
     """
 
-    return HttpResponse("ee")
+    return ReponseJson(200, StatusResponse.VALID, {"message": "El producto ha sido creado exitosamente"})
 
 
 # ----------------------------------------------#
