@@ -74,7 +74,7 @@ def create_seller_login(request: HttpRequest):
             return ReponseJsonError("Error de formato", "El json recibido no sigue el estandar habitual", 400)
 
     content = {
-        "message": "El usuario ha sido creado exitosamente"
+        "message": "El vendedor ha sido creado exitosamente"
     }
 
     return ReponseJson(200, StatusResponse.VALID, json_body=content)
