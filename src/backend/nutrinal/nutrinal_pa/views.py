@@ -57,8 +57,8 @@ def create_seller_login(request: HttpRequest):
 
         for iter in data:
             if ValidRequest.is_valid(iter) != True:
-                message = f"el parametro: {type(iter).__name__}"
-                return ReponseJsonError("Falto enviar un dato", details=message)
+                message = f"Falta el parametro: {type(iter).__name__}"
+                return ReponseJsonError("Faltan parametros a la solicitud", details=message)
 
     else:
         return ReponseJsonError("Falta de permiso", "No tienen permiso para realizar la accion.", 401)
