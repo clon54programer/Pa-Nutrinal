@@ -194,6 +194,44 @@ def make_product(request: HttpRequest):
 
 
     """
+
+    if request.method != "POST":
+        return ReponseJsonError("Permisos insuficientes", "Falta de previligios", 400)
+
+    try:
+        json_data = json.loads(request.body)
+        fields_missing = ["data", "code", "price", "description"]
+
+        if "data" in json_data:
+            return ReponseJsonError("Falta un campo", "El campo data falta en el json")
+
+        data = json_data['data']
+
+        for field in fields_missing:
+            for iter in data:
+                if iter not in iter:
+                    return ReponseJsonError("Falta un campo", f"falta el campo {iter} en el json", 400)
+
+        name = data['name']
+        code = data['code']
+        price = data['price']
+        description = data['description']
+
+        if Product.objects.exists(name=name):
+            return ReponseJsonError("Datos redundantes", "El campo name ya existe en la base de datos")
+
+        if Product.objects.exists(id=id):
+            return ReponseJsonError("Datos redundantes", "El campo id ya existe en la base de datos")
+
+        product = Product.objects.create(
+            name=name, code=code, price=price, description=description)
+
+        production = Production.objects.create(
+            product=product, cant_Avaible=150)
+
+    except json.JSONDecodeError:
+        return ReponseJsonError("Error de formato", "El json recibido no sigue el estandar habitual", 400)
+
     """
     product = Product.objects.create(
         name="Producto Ejemplo",
