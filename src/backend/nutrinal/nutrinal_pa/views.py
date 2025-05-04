@@ -58,12 +58,13 @@ def create_seller_login(request: HttpRequest):
         try:
             json_data = json.loads(request.body)
             fields = ['name', 'id', 'username', 'password']
+            data = json_data['data']
 
             if "data" not in json_data:
                 return ReponseJsonError("Falta un campo", "El campo data no esta incluido en json")
 
             for field in fields:
-                if field not in json_data:
+                if field not in data:
                     return ReponseJsonError("Falta un campo", f"El campo {field} no esta incluido en json")
 
             print("Json Recibido exitosamente")
