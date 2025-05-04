@@ -1,9 +1,6 @@
 from django.test import TestCase
 import requests
 
-from .JsonReponse import ReponseJson, StatusResponse
-import json
-
 
 class TestViewLogin(TestCase):
 
@@ -46,3 +43,12 @@ class TestViewLogin(TestCase):
 
             self.assertEqual(404, r.status_code,
                              "El codigo http de repuesta es diferent a 404")
+
+
+class TestCreateSeller(TestCase):
+
+    def test_post_data(self):
+        json = {}
+
+        r = requests.post(
+            "http://127.0.0.1:8000/nutrinal_pa/create_seller_login", js)
