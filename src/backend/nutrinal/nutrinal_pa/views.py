@@ -21,18 +21,18 @@ def login(request, type_user: str):
 
     if type_user == "admin":
 
-        return ReponseJson(200, StatusResponse.VALID, {"data": f"Bienvenido: {type_user}"})
+        return ReponseJson(200, StatusResponse.VALID, {"message": f"Bienvenido: {type_user}"})
     elif type_user == "client":
 
-        return ReponseJson(200, StatusResponse.VALID, {"data": f"Bienvenido: {type_user}"})
+        return ReponseJson(200, StatusResponse.VALID, {"message": f"Bienvenido: {type_user}"})
     elif type_user == "seller":
 
-        return ReponseJson(200, StatusResponse.VALID, {"data": f"Bienvenido: {type_user}"})
+        return ReponseJson(200, StatusResponse.VALID, {"message": f"Bienvenido: {type_user}"})
     # else:
     #    raise Http404("El tipo de usuario es invalido")
 
     # return ReponseJson(404, StatusResponse.INVALID, f"Tipo de usuario invalido")
-    return ReponseJsonError("Tipo de usuario invalido", "La ruta no contiene un tipo de usuario iqual a seller, admin o client")
+    return ReponseJsonError("Tipo de usuario invalido", "La ruta no contiene un tipo de usuario iqual a seller, admin o client", 404)
 
 
 def create_seller_login(request: HttpRequest):
