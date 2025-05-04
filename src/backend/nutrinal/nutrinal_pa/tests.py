@@ -22,8 +22,16 @@ class TestViewLogin(TestCase):
 
             print(r.text)
 
+    def test_invalid_response(self):
+
         route_invalid = [
             "http://127.0.0.1:8000/nutrinal_pa/login/body",
             "http://127.0.0.1:8000/nutrinal_pa/login/ed",
             "http://127.0.0.1:8000/nutrinal_pa/login/bee",
         ]
+
+        for iter in route_invalid:
+            r = requests.get(iter)
+
+            self.assertEqual(404, r.status_code,
+                             "El codigo http de repuesta es diferent a 404")
