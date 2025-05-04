@@ -155,3 +155,21 @@ def get_seller(request: HttpRequest):
         index += 1
 
     return ReponseJson(200, StatusResponse.VALID, data)
+
+
+def get_seller_login(request: HttpRequest):
+    sellers_login = SellerLogin.objects.all()
+
+    data = {}
+
+    index = 0
+    for seller in sellers_login:
+        data[f"seller_login_{index}"] = {
+            "username": seller.username,
+            "password": seller.password,
+            "identifier": seller.identifier.__str__()
+
+        }
+        index += 1
+
+    return ReponseJson(200, StatusResponse.VALID, data)
