@@ -74,6 +74,23 @@ class TestCreateSeller(TestCase):
         print("status code: ", r.status_code)
         print("json", content['data'])
 
+    def test_post_valid_json(self):
+        json = {
+            "data": {
+                "name": "Carlos",
+                "id": "12345",
+                "username": "carlos_user",
+                "password": "securepass123"
+            }
+        }
+
+        url_post = "http://127.0.0.1:8000/nutrinal_pa/admin/create_seller_login"
+
+        r = requests.post(url_post, json=json)
+
+        print("status code: ", r.status_code)
+        print("data", r.json()['data'])
+
     def test_missing_field(self):
         missing_name = {
             "data": {
@@ -122,3 +139,5 @@ class TestCreateSeller(TestCase):
             print("status code: ", r.status_code)
             print("Error: ", content['data']['error'])
             print("Detalles", content['data']['details'])
+            self.assertEqual(400, r.status_code,
+                             "El codigo http no es igual a 400")
