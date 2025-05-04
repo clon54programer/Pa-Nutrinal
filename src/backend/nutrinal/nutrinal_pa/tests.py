@@ -147,7 +147,7 @@ class TestCreateSeller(TestCase):
 
 class ViewMakeProduct(TestCase):
 
-    def test_post_data():
+    def test_post_data(self):
         content = {"data": {
             "name": "Producto Ejemplo",
             "code": "P12345",
@@ -156,6 +156,20 @@ class ViewMakeProduct(TestCase):
         }}
 
         url_post = "http://127.0.0.1:8000/nutrinal_pa/admin/make_product"
+
+        r = requests.post(url_post, json=content)
+        data = r.json()['data']
+
+        if r.status_code == 400:
+            print("error: ", data['error'])
+            print("detalles: ", data['details'])
+            self.assertEqual(400, r.status_code,
+                             "El codigo http es diferente a 400")
+        elif r.status_code == 200:
+            print("data: ", data)
+            self.assertEqual(200, r.status_code,
+                             "El codigo http es diferente a 200")
+
         print("")
 
     def test_missing_field(self):
