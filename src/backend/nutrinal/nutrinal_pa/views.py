@@ -63,4 +63,8 @@ def create_seller_login(request: HttpRequest):
     else:
         return ReponseJsonError("Falta de permiso", "No tienen permiso para realizar la accion.", 401)
 
-    return HttpResponse("Create")
+    content = {
+        "message": "El usuario ha sido creado exitosamente"
+    }
+
+    return ReponseJson(200, StatusResponse.VALID, content)
