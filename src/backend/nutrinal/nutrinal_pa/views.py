@@ -238,7 +238,25 @@ def get_product(request: HttpRequest):
 
 
 def get_production(request: HttpRequest):
-    return HttpResponse("")
+
+    if request.method != "GET":
+        return ReponseJsonError("Falta de permisos", "Esta ruta solo sse puede enviar informacion", 405)
+
+    if Production.objects.count() == 0:
+        return ReponseJson(204, StatusResponse.INVALID, {"message": "No hay datos en este modelo"})
+
+    data = {}
+    productions = Production.objects.all()
+
+    index: int = 0
+    for production in productions:
+        data[f"production_{index}"] = {
+            "product": production.product.__str__(),
+            "cant_avaible": production.cant_available,
+            "date_updated": production.date_updated
+        }
+
+    return ReponseJson(200, StatusResponse.VALID, data)
 
 
 @csrf_exempt
