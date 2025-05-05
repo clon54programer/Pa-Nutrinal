@@ -143,6 +143,12 @@ def create_seller_login(request: HttpRequest):
 
 def get_seller(request: HttpRequest):
 
+    if request.method != "GET":
+        return ReponseJsonError("Falta de permisos", "Esta ruta solo sse puede enviar informacion", 405)
+
+    if Seller.objects.count() == 0:
+        return ReponseJson(204, StatusResponse.VALID, {"message": "No hay datos en este modelo"})
+
     sellers = Seller.objects.all()
 
     data = {}
@@ -160,6 +166,13 @@ def get_seller(request: HttpRequest):
 
 
 def get_seller_login(request: HttpRequest):
+
+    if request.method != "GET":
+        return ReponseJsonError("Falta de permisos", "Esta ruta solo sse puede enviar informacion", 405)
+
+    if SellerLogin.objects.count() == 0:
+        return ReponseJson(204, StatusResponse.VALID, {"message": "No hay datos en este modelo"})
+
     sellers_login = SellerLogin.objects.all()
 
     data = {}
@@ -180,7 +193,7 @@ def get_seller_login(request: HttpRequest):
 def get_client(request: HttpRequest):
 
     if request.method != "GET":
-        return ReponseJsonError("Falta de permisos", "Esta ruta solo sse puede enviar informacion", 400)
+        return ReponseJsonError("Falta de permisos", "Esta ruta solo sse puede enviar informacion", 405)
 
     if Client.objects.count() == 0:
         return ReponseJson(204, StatusResponse.VALID, {"message": "No hay datos en este modelo"})
