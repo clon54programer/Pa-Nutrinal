@@ -237,20 +237,6 @@ def make_product(request: HttpRequest):
     except json.JSONDecodeError:
         return ReponseJsonError("Error de formato", "El json recibido no sigue el estandar habitual", 400)
 
-    """
-    product = Product.objects.create(
-        name="Producto Ejemplo",
-        code="P12345",
-        price=1000.50,
-        description="Este es un producto de prueba"
-    )
-
-    production = Production.objects.create(
-        product=product,
-        cant_available=150  # Cantidad disponible
-    )
-    """
-
     return ReponseJson(200, StatusResponse.VALID, {"message": "El producto ha sido creado exitosamente"})
 
 
