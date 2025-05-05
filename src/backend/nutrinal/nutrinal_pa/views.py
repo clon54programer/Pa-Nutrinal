@@ -177,6 +177,18 @@ def get_seller_login(request: HttpRequest):
     return ReponseJson(200, StatusResponse.VALID, data)
 
 
+def get_client(request: HttpRequest):
+    return HttpResponse("")
+
+
+def get_product(request: HttpRequest):
+    return HttpResponse("")
+
+
+def get_production(request: HttpRequest):
+    return HttpResponse("")
+
+
 @csrf_exempt
 def make_product(request: HttpRequest):
     """
@@ -239,5 +251,8 @@ def make_product(request: HttpRequest):
 
     return ReponseJson(200, StatusResponse.VALID, {"message": "El producto ha sido creado exitosamente"})
 
+
+def update_production(request: HttpRequest):
+    return HttpResponse("")
 
 # ----------------------------------------------#
