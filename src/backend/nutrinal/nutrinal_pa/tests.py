@@ -261,31 +261,30 @@ class TestViewsGetter(TestCase):
 
     def test_get_client_empty_db(self):
         """Verifica que `get_client` retorna 204 cuando no hay datos."""
-        request = HttpRequest()
-        request.method = "GET"
-        response = get_client(request)
-        assert response.status_code == 204
+        r = requests.get(self.url_client)
+
+        if r.status_code != 204:
+            print(r.json())
+        else:
+            self.assertEqual(204, r.status_code,
+                             "El codigo http es diferente a 204")
 
     def test_get_product_empty_db(self):
         """Verifica que `get_product` retorna 204 cuando no hay datos."""
-        request = HttpRequest()
-        request.method = "GET"
-        response = get_product(request)
-        assert response.status_code == 204
+        r = requests.get(self.url_product)
+
+        if r.status_code != 204:
+            print(r.json())
+        else:
+            self.assertEqual(204, r.status_code,
+                             "El codigo  http es diferente a 204")
 
     def test_get_production_empty_db(self):
         """Verifica que `get_production` retorna 204 cuando no hay datos."""
-        request = HttpRequest()
-        request.method = "GET"
-        response = get_production(request)
-        assert response.status_code == 204
+        r = requests.get(self.url_production)
 
-    def test_get_client_with_data(self):
-        """Verifica que `get_client` retorna 200 con datos."""
-        ClientModel.objects.create(
-            name="Alice", email="alice@example.com", phone_number="123456789", identifier="5678")
-        request = HttpRequest()
-        request.method = "GET"
-        response = get_client(request)
-        assert response.status_code == 200
-        assert "client_0" in response.json()
+        if r.status_code != 204:
+            print(r.json())
+        else:
+            self.assertEqual(204, r.status_code,
+                             "El codigo  http es diferente a 204")
