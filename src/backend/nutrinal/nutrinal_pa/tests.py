@@ -242,12 +242,16 @@ class TestViewsGetter(TestCase):
             self.assertEqual(204, r.status_code,
                              "El codigo http es diferente a 204")
 
-    def test_get_seller_wrong_method(self):
-        """Verifica que `get_seller` retorna 405 si el método no es GET."""
-        r = requests.post(self.url_seller, json={"data"})
+    def test_getter_wrong_method(self):
+        """Verifica que  retorna 405 si el método no es GET."""
+        list = [self.url_production, self.url_client,
+                self.url_product, self.url_seller, self.url_seller_login]
 
-        self.assertEqual(405, r.status_code,
-                         "El codigo http es diferente a 405")
+        for ult in list:
+            r = requests.post(self.url_seller, json={"data"})
+
+            self.assertEqual(405, r.status_code,
+                             "El codigo http es diferente a 405")
 
     def test_get_seller_login_empty_db(self):
         """Verifica que `get_seller_login` retorna 204 cuando no hay datos."""
