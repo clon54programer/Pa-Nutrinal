@@ -210,7 +210,7 @@ def make_product(request: HttpRequest):
 
         for field in fields_missing:
             if field not in data:
-                return ReponseJsonError("Falta un campo", f"falta el campo {iter} en el json", 400)
+                return ReponseJsonError("Falta un campo", f"falta el campo {field} en el json", 400)
 
         name = data['name']
         code = data['code']
