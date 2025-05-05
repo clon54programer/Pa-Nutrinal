@@ -234,7 +234,8 @@ class TestViewsGetter(TestCase):
 
     def test_get_seller_empty_db(self):
         """Verifica que `get_seller` retorna 204 cuando no hay datos."""
-        r = requests.get(self.url_seller)
+        url_seller = "http://127.0.0.1:8000/nutrinal_pa/admin/get_seller"
+        r = requests.get(url_seller)
 
         if r.status_code != 204:
             print(r.json())
@@ -244,18 +245,26 @@ class TestViewsGetter(TestCase):
 
     def test_getter_wrong_method(self):
         """Verifica que  retorna 405 si el método no es GET."""
-        list = [self.url_production, self.url_client,
-                self.url_product, self.url_seller, self.url_seller_login]
 
-        for ult in list:
-            r = requests.post(self.url_seller, json={"data"})
+        url_seller = "http://127.0.0.1:8000/nutrinal_pa/admin/get_seller"
+        url_seller_login = "http://127.0.0.1:8000/nutrinal_pa/admin/get_seller_login"
+        url_client = "http://127.0.0.1:8000/nutrinal_pa/admin/get_client"
+        url_product = "http://127.0.0.1:8000/nutrinal_pa/admin/get_product"
+        url_production = "http://127.0.0.1:8000/nutrinal_pa/admin/get_production"
+
+        list = [url_production, url_client,
+                url_product, url_seller, url_seller_login]
+
+        for url in list:
+            r = requests.post(url, json={"data": "jaun"})
 
             self.assertEqual(405, r.status_code,
                              "El codigo http es diferente a 405")
 
     def test_get_seller_login_empty_db(self):
         """Verifica que `get_seller_login` retorna 204 cuando no hay datos."""
-        r = requests.get(self.url_seller_login)
+        url_seller_login = "http://127.0.0.1:8000/nutrinal_pa/admin/get_seller_login"
+        r = requests.get(url_seller_login)
 
         if r.status_code != 204:
             print(r.json())
@@ -265,7 +274,8 @@ class TestViewsGetter(TestCase):
 
     def test_get_client_empty_db(self):
         """Verifica que `get_client` retorna 204 cuando no hay datos."""
-        r = requests.get(self.url_client)
+        url_client = "http://127.0.0.1:8000/nutrinal_pa/admin/get_client"
+        r = requests.get(url_client)
 
         if r.status_code != 204:
             print(r.json())
@@ -275,7 +285,8 @@ class TestViewsGetter(TestCase):
 
     def test_get_product_empty_db(self):
         """Verifica que `get_product` retorna 204 cuando no hay datos."""
-        r = requests.get(self.url_product)
+        url_product = "http://127.0.0.1:8000/nutrinal_pa/admin/get_product"
+        r = requests.get(url_product)
 
         if r.status_code != 204:
             print(r.json())
@@ -285,7 +296,8 @@ class TestViewsGetter(TestCase):
 
     def test_get_production_empty_db(self):
         """Verifica que `get_production` retorna 204 cuando no hay datos."""
-        r = requests.get(self.url_production)
+        url_production = "http://127.0.0.1:8000/nutrinal_pa/admin/get_production"
+        r = requests.get(url_production)
 
         if r.status_code != 204:
             print(r.json())
