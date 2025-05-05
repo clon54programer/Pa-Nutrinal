@@ -327,12 +327,12 @@ def make_product(request: HttpRequest):
     return ReponseJson(200, StatusResponse.VALID, {"message": "El producto ha sido creado exitosamente"})
 
 
+@csrf_exempt
 def update_production(request: HttpRequest, code_product: int):
     """
     Actualiza la producion de un producto, segun su code.
     Informacion:
     {
-        "code":xxx,
         cant_available": 122
     }
 
@@ -345,7 +345,6 @@ def update_production(request: HttpRequest, code_product: int):
         production = Production.objects.get(product__code=code_product)
         data = json.loads(request.body)
 
-        code = data['code']
         cant_available = data['cant_available']
 
         production.cant_available += cant_available
