@@ -327,7 +327,36 @@ def make_product(request: HttpRequest):
     return ReponseJson(200, StatusResponse.VALID, {"message": "El producto ha sido creado exitosamente"})
 
 
-def update_production(request: HttpRequest):
-    return HttpResponse("")
+def update_production(request: HttpRequest, code_product: int):
+    """
+    Actualiza la producion de un producto, segun su code.
+    Informacion:
+    {
+        "code":xxx,
+        cant_available": 122
+    }
+
+    """
+
+    if request.method != "PATCH":
+        return ReponseJsonError("Falta de permisos", "Esta ruta solo sse puede enviar informacion", 405)
+
+    try:
+        production = Production.objects.get(product__code=code_product)
+        data = json.loads(request.body)
+
+        code = data['code']
+        cant_available = data['cant_available']
+
+        production.cant_available += cant_available
+
+        production.save()
+
+    except json.JSONDecodeError:
+        return ReponseJsonError("Error de formato", "El json enviado no respeta el estandar habitual", 400)
+    except Production.DoesNotExist:
+        return ReponseJsonError("Dato no existe", "El codigo suministrado no existe", 204)
+
+    return ReponseJson(200, StatusResponse.VALID, {"message": "La cantidad de producion se actualizo exitosamente"})
 
 # ----------------------------------------------#
