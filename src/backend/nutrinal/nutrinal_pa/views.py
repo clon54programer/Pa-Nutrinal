@@ -237,6 +237,7 @@ def get_product(request: HttpRequest):
             "price": product.price,
             "description": product.description
         }
+        index += 1
 
     return ReponseJson(200, StatusResponse.VALID, data)
 
@@ -260,6 +261,7 @@ def get_production(request: HttpRequest):
             "cant_avaible": production.cant_available,
             "date_updated": production.date_updated
         }
+        index += 1
 
     return ReponseJson(200, StatusResponse.VALID, data)
 
