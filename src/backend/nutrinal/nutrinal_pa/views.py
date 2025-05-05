@@ -178,7 +178,27 @@ def get_seller_login(request: HttpRequest):
 
 
 def get_client(request: HttpRequest):
-    return HttpResponse("")
+
+    if request.method != "GET":
+        return ReponseJsonError("Falta de permisos", "Esta ruta solo sse puede enviar informacion", 400)
+
+    if Client.objects.count() == 0:
+        return ReponseJson(204, StatusResponse.VALID, {"message": "No hay datos en este modelo"})
+
+    data = {}
+    clients = Client.objects.all()
+
+    index: int = 0
+    for client in clients:
+        data[f"client_{index}"] = {
+            "name": client.name,
+            "email": client.email,
+            "phone_number": client.phone_number,
+            "identifier": client.identifier
+        }
+        index += 1
+
+    return ReponseJson(200, StatusResponse.VALID, data)
 
 
 def get_product(request: HttpRequest):
