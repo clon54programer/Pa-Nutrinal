@@ -141,6 +141,7 @@ def create_seller_login(request: HttpRequest):
 
 # --------vista para los administradores--------#
 
+@csrf_exempt
 def get_seller(request: HttpRequest):
 
     if request.method != "GET":
@@ -165,6 +166,7 @@ def get_seller(request: HttpRequest):
     return ReponseJson(200, StatusResponse.VALID, data)
 
 
+@csrf_exempt
 def get_seller_login(request: HttpRequest):
 
     if request.method != "GET":
@@ -190,6 +192,7 @@ def get_seller_login(request: HttpRequest):
     return ReponseJson(200, StatusResponse.VALID, data)
 
 
+@csrf_exempt
 def get_client(request: HttpRequest):
 
     if request.method != "GET":
@@ -214,6 +217,7 @@ def get_client(request: HttpRequest):
     return ReponseJson(200, StatusResponse.VALID, data)
 
 
+@csrf_exempt
 def get_product(request: HttpRequest):
 
     if request.method != "GET":
@@ -237,6 +241,7 @@ def get_product(request: HttpRequest):
     return ReponseJson(200, StatusResponse.VALID, data)
 
 
+@csrf_exempt
 def get_production(request: HttpRequest):
 
     if request.method != "GET":
