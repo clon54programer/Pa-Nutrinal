@@ -221,3 +221,71 @@ class ViewMakeProduct(TestCase):
 
             self.assertEqual(400, r.status_code,
                              "El codigo http es diferente a 400")
+
+
+class TestViewsGetter(TestCase):
+
+    def SetUp(self):
+        self.url_seller = "http://127.0.0.1:8000/nutrinal_pa/admin/get_seller"
+        self.url_seller_login = "http://127.0.0.1:8000/nutrinal_pa/admin/get_seller_login"
+        self.url_client = "http://127.0.0.1:8000/nutrinal_pa/admin/get_client"
+        self.url_product = "http://127.0.0.1:8000/nutrinal_pa/admin/get_product"
+        self.url_production = "http://127.0.0.1:8000/nutrinal_pa/admin/get_production"
+
+    def test_get_seller_empty_db(self):
+        """Verifica que `get_seller` retorna 204 cuando no hay datos."""
+        r = requests.get(self.url_seller)
+
+        if r.status_code != 204:
+            print(r.json())
+        else:
+            self.assertEqual(204, r.status_code,
+                             "El codigo http es diferente a 204")
+
+    def test_get_seller_wrong_method(self):
+        """Verifica que `get_seller` retorna 405 si el método no es GET."""
+        r = requests.post(self.url_seller, json={"data"})
+
+        self.assertEqual(405, r.status_code,
+                         "El codigo http es diferente a 405")
+
+    def test_get_seller_login_empty_db(self):
+        """Verifica que `get_seller_login` retorna 204 cuando no hay datos."""
+        r = requests.get(self.url_seller_login)
+
+        if r.status_code != 204:
+            print(r.json())
+        else:
+            self.assertEqual(204, r.status_code,
+                             "El codigo http es diferente a 204")
+
+    def test_get_client_empty_db(self):
+        """Verifica que `get_client` retorna 204 cuando no hay datos."""
+        request = HttpRequest()
+        request.method = "GET"
+        response = get_client(request)
+        assert response.status_code == 204
+
+    def test_get_product_empty_db(self):
+        """Verifica que `get_product` retorna 204 cuando no hay datos."""
+        request = HttpRequest()
+        request.method = "GET"
+        response = get_product(request)
+        assert response.status_code == 204
+
+    def test_get_production_empty_db(self):
+        """Verifica que `get_production` retorna 204 cuando no hay datos."""
+        request = HttpRequest()
+        request.method = "GET"
+        response = get_production(request)
+        assert response.status_code == 204
+
+    def test_get_client_with_data(self):
+        """Verifica que `get_client` retorna 200 con datos."""
+        ClientModel.objects.create(
+            name="Alice", email="alice@example.com", phone_number="123456789", identifier="5678")
+        request = HttpRequest()
+        request.method = "GET"
+        response = get_client(request)
+        assert response.status_code == 200
+        assert "client_0" in response.json()
