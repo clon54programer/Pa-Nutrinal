@@ -347,6 +347,9 @@ def update_production(request: HttpRequest, code_product: int):
         production = Production.objects.get(product__code=code_product)
         data = json.loads(request.body)
 
+        if "cant_available" not in data:
+            return ReponseJsonError("Falta un campo", "El campo cant_available no esta en el json", 400)
+
         cant_available = data['cant_available']
 
         production.cant_available += cant_available
