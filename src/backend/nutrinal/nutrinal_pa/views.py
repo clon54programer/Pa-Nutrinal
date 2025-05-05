@@ -147,7 +147,7 @@ def get_seller(request: HttpRequest):
         return ReponseJsonError("Falta de permisos", "Esta ruta solo sse puede enviar informacion", 405)
 
     if Seller.objects.count() == 0:
-        return ReponseJson(204, StatusResponse.VALID, {"message": "No hay datos en este modelo"})
+        return ReponseJson(204, StatusResponse.INVALID, {"message": "No hay datos en este modelo"})
 
     sellers = Seller.objects.all()
 
@@ -171,7 +171,7 @@ def get_seller_login(request: HttpRequest):
         return ReponseJsonError("Falta de permisos", "Esta ruta solo sse puede enviar informacion", 405)
 
     if SellerLogin.objects.count() == 0:
-        return ReponseJson(204, StatusResponse.VALID, {"message": "No hay datos en este modelo"})
+        return ReponseJson(204, StatusResponse.INVALID, {"message": "No hay datos en este modelo"})
 
     sellers_login = SellerLogin.objects.all()
 
@@ -196,7 +196,7 @@ def get_client(request: HttpRequest):
         return ReponseJsonError("Falta de permisos", "Esta ruta solo sse puede enviar informacion", 405)
 
     if Client.objects.count() == 0:
-        return ReponseJson(204, StatusResponse.VALID, {"message": "No hay datos en este modelo"})
+        return ReponseJson(204, StatusResponse.INVALID, {"message": "No hay datos en este modelo"})
 
     data = {}
     clients = Client.objects.all()
@@ -215,7 +215,26 @@ def get_client(request: HttpRequest):
 
 
 def get_product(request: HttpRequest):
-    return HttpResponse("")
+
+    if request.method != "GET":
+        return ReponseJsonError("Falta de permisos", "Esta ruta solo sse puede enviar informacion", 405)
+
+    if Product.objects.count() == 0:
+        return ReponseJson(204, StatusResponse.INVALID, {"message": "No hay datos en este modelo"})
+
+    data = {}
+    products = Product.objects.all()
+
+    index: int = 0
+    for product in products:
+        data[f"product_{index}"] = {
+            "name": product.name,
+            "code": product.code,
+            "price": product.price,
+            "description": product.description
+        }
+
+    return ReponseJson(200, StatusResponse.VALID, data)
 
 
 def get_production(request: HttpRequest):
