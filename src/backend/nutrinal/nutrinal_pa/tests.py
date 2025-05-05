@@ -304,3 +304,55 @@ class TestViewsGetter(TestCase):
         else:
             self.assertEqual(204, r.status_code,
                              "El codigo  http es diferente a 204")
+
+
+class TestViewUpdateProduct(TestCase):
+
+    def test_wrong_method(self):
+        code = "123"
+        url = f"http://127.0.0.1:8000/nutrinal_pa/admin/update_production/{code}"
+
+        json = {
+            "code": code,
+            "cant_available": 1000
+        }
+
+        r = requests.post(url, json=json)
+
+        self.assertEqual(405, r.status_code,
+                         "El codigo http es diferente a 405")
+
+    def test_no_exist_product(self):
+        print()
+
+    def test_missing_field_product(self):
+        code = "123"
+        new_can_avaible = 20
+        url = f"http://127.0.0.1:8000/nutrinal_pa/admin/update_production/{code}"
+
+        json = {
+            "code": code
+        }
+
+        r = requests.patch(url, json=json)
+
+        self.assertEqual(400, r.status_code,
+                         "El codigo http es diferente a 400")
+
+    def test_update_cant_avaible(self):
+
+        code = 123
+        new_can_avaible = 20
+        url = f"http://127.0.0.1:8000/nutrinal_pa/admin/update_production/{code}"
+
+        json = {
+            "cant_available": new_can_avaible
+        }
+
+        r = requests.patch(url, json=json)
+
+        print("json:", r.text.encode())
+        r.raise_for_status()
+
+        self.assertEqual(200, r.status_code,
+                         "El codigo http es diferente a 200")
