@@ -151,6 +151,9 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=15, decimal_places=2)
     description = models.TextField()
 
+    def __str__(self) -> str:
+        return f"name: {self.name} code: {self.code} price: {self.price} description: {self.description}"
+
 
 class Production(models.Model):
     """
