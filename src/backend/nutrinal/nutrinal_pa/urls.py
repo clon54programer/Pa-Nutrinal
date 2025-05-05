@@ -11,5 +11,8 @@ urlpatterns = [
          name="create_default_data"),
     path("admin/get_seller", views.get_seller, name="get_seller"),
     path("admin/get_seller_login", views.get_seller_login, name="get_seller_login"),
+    path("admin/get_client", views.get_client, name="get_client"),
+    path("admin/get_product", views.get_product, name="get_product"),
+    path("admin/get_production", views.get_production, name="get_production"),
     path("admin/make_product", views.make_product, name="make_product")
 ]
