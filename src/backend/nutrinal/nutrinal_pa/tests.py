@@ -436,6 +436,17 @@ class TestViewMakeOrder(TestCase):
 
         missing_data = {}
 
+        list = [missing_client, missing_seller, missing_cant_product,
+                missing_data, missing_product, missing_shipping]
+
+        url = f"http://127.0.0.1:8000/nutrinal_pa/make_order"
+
+        for field in list:
+            r = requests.post(url=url, json=field)
+
+            self.assertEqual(400, r.status_code, "El codigo http es igual 400")
+            print("json: ", r.json())
+
     def test_do_no_exist_client(self):
         print()
 
