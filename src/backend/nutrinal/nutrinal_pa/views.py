@@ -359,7 +359,7 @@ def update_production(request: HttpRequest, code_product: str):
     except json.JSONDecodeError:
         return ReponseJsonError("Error de formato", "El json enviado no respeta el estandar habitual", 400)
     except Production.DoesNotExist:
-        return ReponseJsonError("Dato no existe", "El codigo suministrado no existe", 204)
+        return ReponseJsonError("Dato no existe", "El codigo suministrado no existe", 404)
 
     return ReponseJson(200, StatusResponse.VALID, {"message": "La cantidad de producion se actualizo exitosamente"})
 
