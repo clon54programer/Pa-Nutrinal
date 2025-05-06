@@ -373,15 +373,46 @@ def make_order(request: HttpRequest):
     Crea una pedido con los siguientes datos:
     {
     "data":{
-    "client"{}
-    "seller": {}
-    "products": {}
+    "identifier_client": ""
+    "identifier_seller": "",
+    "code_product":"",
     "cant_product":{},
     "shipping_destination": ""
 
     }
     }
     """
+
+    if request != "POST":
+        return ReponseJsonError("Falta de permisos", "Esta ruta solo se puede enviar informacion", 405)
+
+    try:
+        data = json.loads(request.body)
+        fields = ['identifier_client',
+                  'identifier_seller', 'code_product', 'cant_product', 'shipping_destination']
+
+        if "data" not in data:
+            return ReponseJsonError("Falta un campo", "El campo data no esta en el json")
+
+        for field in data:
+            if field not in data:
+                return ReponseJsonError("Falta un campo", f"El campo {field} no esta en el json")
+
+        info = data['data']
+
+        identifier_client = info['identifier_client']
+        identifier_seller = info['identifier_seller']
+        code_product = info['code_product']
+        cant_product = info['cant_product']
+        shipping_destination = info['shipping_destination']
+
+        client = Client.objects.get(identifier=identifier_client)
+        seller = Seller.objects.get(identifier=identifier_seller)
+        product = Product.objects.get(code=code_product)
+
+    except json.JSONDecodeError:
+        return ReponseJsonError("Error de formato", "El json enviado no respeta el estandar habitual", 400)
+
     return HttpResponse("")
 
 
