@@ -7,6 +7,8 @@ import json
 from .models import Seller, SellerLogin, Client, ClientLogin, Order, Product, Production, Admin
 from django.db.models import Model
 
+import uuid
+
 from . import ValidRequest
 
 # Create your views here.
@@ -410,10 +412,21 @@ def make_order(request: HttpRequest):
         seller = Seller.objects.get(identifier=identifier_seller)
         product = Product.objects.get(code=code_product)
 
+        Order.objects.create(seller=seller, client=client,)
+
+        order = Order.objects.create(
+            id=uuid.uuid4(),  # Generar un UUID manualmente si es necesario
+            cant_product=cant_product,
+            shipping_destination=shipping_destination,
+            seller=seller,
+            client=client,
+            product=product
+        )
+
     except json.JSONDecodeError:
         return ReponseJsonError("Error de formato", "El json enviado no respeta el estandar habitual", 400)
 
-    return HttpResponse("")
+    return ReponseJson(200, StatusResponse.VALID, {"message": "Se ha creado el pedido exitosamente"})
 
 
 # def get_order_status(request: HttpRequest):
