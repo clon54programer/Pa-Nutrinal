@@ -341,7 +341,7 @@ class TestViewUpdateProduct(TestCase):
 
     def test_update_cant_avaible(self):
 
-        code = 123
+        code = "P12345"
         new_can_avaible = 20
         url = f"http://127.0.0.1:8000/nutrinal_pa/admin/update_production/{code}"
 
@@ -351,7 +351,7 @@ class TestViewUpdateProduct(TestCase):
 
         r = requests.patch(url, json=json)
 
-        print("json:", r.text.encode())
+        print("json:", r.json())
         r.raise_for_status()
 
         self.assertEqual(200, r.status_code,
