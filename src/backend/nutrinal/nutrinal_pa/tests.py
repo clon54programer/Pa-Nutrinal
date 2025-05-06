@@ -403,7 +403,7 @@ class TestViewMakeOrder(TestCase):
             }
         }
         missing_seller = {"data": {
-            "identifier_client": "1223",
+            "identifier_client": "JP123",
             "code_product": "123",
             "cant_product": 100,
             "shipping_destination": "jajjdjjd"
@@ -411,22 +411,27 @@ class TestViewMakeOrder(TestCase):
 
         missing_product = {"data": {
             "identifier_seller": "12345",
-            "identifier_client": "1223",
+            "identifier_client": "JP123",
             "cant_product": 100,
             "shipping_destination": "jajjdjjd"
         }}
 
         missing_cant_product = {
-            "identifier_seller": "12345",
-            "identifier_client": "1223",
-            "code_product": "123",
-            "shipping_destination": "jajjdjjd"
+            "data": {
+                "identifier_seller": "12345",
+                "identifier_client": "JP123",
+                "code_product": "123",
+                "shipping_destination": "jajjdjjd"
+            }
         }
 
         missing_shipping = {
-            "identifier_seller": "12345",
-            "identifier_client": "1223",
-            "code_product": "123"
+            "data": {
+                "identifier_seller": "12345",
+                "identifier_client": "JP123",
+                "code_product": "123",
+                "cant_product": 100,
+            }
         }
 
         missing_data = {}
