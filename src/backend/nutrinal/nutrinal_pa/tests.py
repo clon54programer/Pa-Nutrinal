@@ -448,10 +448,56 @@ class TestViewMakeOrder(TestCase):
             print("json: ", r.json())
 
     def test_do_no_exist_client(self):
-        print()
+
+        data = {
+            "data": {
+                "identifier_client": "P123",
+                "identifier_seller": "12345",
+                "code_product": "123",
+                "cant_product": 100,
+                "shipping_destination": "jajjdjjd"
+            }
+        }
+
+        url = f"http://127.0.0.1:8000/nutrinal_pa/make_order"
+
+        r = requests.post(url=url, json=data)
+
+        self.assertEqual(404, r.status_code, "El codigo http es igual 404")
+        print("json: ", r.json())
 
     def test_do_no_exist_seller(self):
-        print()
+        data = {
+            "data": {
+                "identifier_client": "JP123",
+                "identifier_seller": "1235",
+                "code_product": "123",
+                "cant_product": 100,
+                "shipping_destination": "jajjdjjd"
+            }
+        }
+
+        url = f"http://127.0.0.1:8000/nutrinal_pa/make_order"
+
+        r = requests.post(url=url, json=data)
+
+        self.assertEqual(404, r.status_code, "El codigo http es igual 404")
+        print("json: ", r.json())
 
     def test_do_no_exist_product(self):
-        print()
+        data = {
+            "data": {
+                "identifier_client": "JP123",
+                "identifier_seller": "12345",
+                "code_product": "12",
+                "cant_product": 100,
+                "shipping_destination": "jajjdjjd"
+            }
+        }
+
+        url = f"http://127.0.0.1:8000/nutrinal_pa/make_order"
+
+        r = requests.post(url=url, json=data)
+
+        self.assertEqual(404, r.status_code, "El codigo http es igual 404")
+        print("json: ", r.json())
