@@ -369,6 +369,19 @@ def update_production(request: HttpRequest, code_product: str):
 
 
 def make_order(request: HttpRequest):
+    """
+    Crea una pedido con los siguientes datos:
+    {
+    "data":{
+    "client"{}
+    "seller": {}
+    "products": {}
+    "cant_product":{},
+    "shipping_destination": ""
+
+    }
+    }
+    """
     return HttpResponse("")
 
 
