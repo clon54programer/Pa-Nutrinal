@@ -419,9 +419,10 @@ def make_order(request: HttpRequest):
             cant_product=cant_product,
             shipping_destination=shipping_destination,
             seller=seller,
-            client=client,
-            product=product
+            client=client
         )
+
+        order.product.set([product])
 
     except json.JSONDecodeError:
         return ReponseJsonError("Error de formato", "El json enviado no respeta el estandar habitual", 400)
