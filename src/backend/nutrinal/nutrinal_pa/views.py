@@ -330,7 +330,7 @@ def make_product(request: HttpRequest):
 
 
 @csrf_exempt
-def update_production(request: HttpRequest, code_product: int):
+def update_production(request: HttpRequest, code_product: str):
     """
     Actualiza la producion de un producto, segun su code.
     Informacion:
