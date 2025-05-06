@@ -371,3 +371,26 @@ class TestViewUpdateProduct(TestCase):
 
         self.assertEqual(200, r.status_code,
                          "El codigo http es diferente a 200")
+
+
+class TestViewMakeOrder(TestCase):
+
+    def test_wrong_method(self):
+        url = f"http://127.0.0.1:8000/nutrinal_pa/make_order"
+
+        r = requests.get(url)
+
+        self.assertEqual(405, r.status_code,
+                         "El codigo http es diferente a 405")
+
+    def test_missing_field(self):
+        print()
+
+    def test_do_no_exist_client(self):
+        print()
+
+    def test_do_no_exist_seller(self):
+        print()
+
+    def test_do_no_exist_product(self):
+        print()
