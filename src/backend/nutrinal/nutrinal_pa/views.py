@@ -370,6 +370,7 @@ def update_production(request: HttpRequest, code_product: str):
 # --------vista para los vendedores y clientes--------#
 
 
+@csrf_exempt
 def make_order(request: HttpRequest):
     """
     Crea una pedido con los siguientes datos:
