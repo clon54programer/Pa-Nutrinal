@@ -384,7 +384,52 @@ class TestViewMakeOrder(TestCase):
                          "El codigo http es diferente a 405")
 
     def test_missing_field(self):
-        print()
+        """
+        "data":{
+    "identifier_client": ""
+    "identifier_seller": "",
+    "code_product":"",
+    "cant_product":{},
+    "shipping_destination": ""
+
+        """
+
+        missing_client = {
+            "data": {
+                "identifier_seller": "12345",
+                "code_product": "123",
+                "cant_product": 100,
+                "shipping_destination": "jajjdjjd"
+            }
+        }
+        missing_seller = {"data": {
+            "identifier_client": "1223",
+            "code_product": "123",
+            "cant_product": 100,
+            "shipping_destination": "jajjdjjd"
+        }}
+
+        missing_product = {"data": {
+            "identifier_seller": "12345",
+            "identifier_client": "1223",
+            "cant_product": 100,
+            "shipping_destination": "jajjdjjd"
+        }}
+
+        missing_cant_product = {
+            "identifier_seller": "12345",
+            "identifier_client": "1223",
+            "code_product": "123",
+            "shipping_destination": "jajjdjjd"
+        }
+
+        missing_shipping = {
+            "identifier_seller": "12345",
+            "identifier_client": "1223",
+            "code_product": "123"
+        }
+
+        missing_data = {}
 
     def test_do_no_exist_client(self):
         print()
