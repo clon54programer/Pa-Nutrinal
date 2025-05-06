@@ -221,6 +221,13 @@ class Order(models.Model):
     _product: LLave forana
         Es una llave foranea que identifica los productos que 
         compra el cliente.
+
+    _order_date: DateTime
+        Es una fecha que identica cuando se realizo el pedido.
+
+    __date_update: DateTime
+        Es una fecha que identifica la ultima actualizacion de
+        estado del pedido.
     """
     id = models.UUIDField(default=uuid.uuid4, editable=False,
                           unique=True, primary_key=True)
