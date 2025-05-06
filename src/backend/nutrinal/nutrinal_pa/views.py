@@ -395,13 +395,13 @@ def make_order(request: HttpRequest):
                   'identifier_seller', 'code_product', 'cant_product', 'shipping_destination']
 
         if "data" not in json_data:
-            return ReponseJsonError("Falta un campo", "El campo data no esta en el json")
+            return ReponseJsonError("Falta un campo", "El campo data no esta en el json", 400)
 
         data = json_data['data']
 
         for field in fields:
             if field not in data:
-                return ReponseJsonError("Falta un campo", f"El campo {field} no esta en el json")
+                return ReponseJsonError("Falta un campo", f"El campo {field} no esta en el json", 400)
 
         identifier_client = data['identifier_client']
         identifier_seller = data['identifier_seller']
@@ -427,6 +427,12 @@ def make_order(request: HttpRequest):
 
     except json.JSONDecodeError:
         return ReponseJsonError("Error de formato", "El json enviado no respeta el estandar habitual", 400)
+    except Client.DoesNotExist:
+        return ReponseJsonError("El cliente no existe", "El codigo del cliente no existe en la base de datos", 404)
+    except Seller.DoesNotExist:
+        return ReponseJsonError("El vendedor no existe", "El codigo del vendedor no existe en la base de datos", 404)
+    except Product.DoesNotExist:
+        return ReponseJsonError("El Product no existe", "El codigo del Product no existe en la base de datos", 404)
 
     return ReponseJson(200, StatusResponse.VALID, {"message": "Se ha creado el pedido exitosamente"})
 
