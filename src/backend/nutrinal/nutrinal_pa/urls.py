@@ -16,5 +16,6 @@ urlpatterns = [
     path("admin/get_production", views.get_production, name="get_production"),
     path("admin/make_product", views.make_product, name="make_product"),
     path("admin/update_production/<str:code_product>",
-         views.update_production, name="update_production")
+         views.update_production, name="update_production"),
+    path("make_order", views.make_order, name="make_order")
 ]
