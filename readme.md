@@ -6,4 +6,4 @@
 
 ## Listas de pendientes
 - Agregar la conexsion a MySql
-- quitar la eximision de la vista create_seller_login
+- quitar la eximision de la vistas que debe enviar o actualizar informacion.
