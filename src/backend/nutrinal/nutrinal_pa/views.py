@@ -364,3 +364,16 @@ def update_production(request: HttpRequest, code_product: str):
     return ReponseJson(200, StatusResponse.VALID, {"message": "La cantidad de producion se actualizo exitosamente"})
 
 # ----------------------------------------------#
+
+# --------vista para los vendedores y clientes--------#
+
+
+def make_order(request: HttpRequest):
+    return HttpResponse("")
+
+
+# def get_order_status(request: HttpRequest):
+
+# def get_history_orders(request: HttpRequest):
+
+# ----------------------------------------------------#
