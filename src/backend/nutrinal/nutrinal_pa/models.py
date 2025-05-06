@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 # from django.core.validators import RegexValidator
 # Create your models here.
 
@@ -194,6 +195,9 @@ class Order(models.Model):
     Atributos
     --------
 
+    __id: UUID
+        Es un identificador de la venta
+
     __cant_product: int
         Es un numero de entero que almacena la cantidad del 
         producto que se debe enviar
@@ -218,6 +222,8 @@ class Order(models.Model):
         Es una llave foranea que identifica los productos que 
         compra el cliente.
     """
+    id = models.UUIDField(default=uuid.uuid4, editable=False,
+                          unique=True, primary_key=True)
     cant_product = models.BigIntegerField(default=0)
     status = models.CharField(max_length=50, choices=[
         ("pending", "Pendiente"),
@@ -229,6 +235,9 @@ class Order(models.Model):
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     product = models.ManyToManyField(Product)
+
+    order_date = models.DateTimeField(auto_now_add=True)
+    date_update = models.DateTimeField(auto_now_add=True)
 
     def get_status(self):
         """
