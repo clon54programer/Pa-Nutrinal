@@ -326,7 +326,7 @@ class TestViewUpdateProduct(TestCase):
         print()
 
     def test_missing_field_product(self):
-        code = "123"
+        code = "P12345"
         new_can_avaible = 20
         url = f"http://127.0.0.1:8000/nutrinal_pa/admin/update_production/{code}"
 
@@ -335,6 +335,8 @@ class TestViewUpdateProduct(TestCase):
         }
 
         r = requests.patch(url, json=json)
+
+        print("json: ", r.json())
 
         self.assertEqual(400, r.status_code,
                          "El codigo http es diferente a 400")
