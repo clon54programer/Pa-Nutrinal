@@ -409,11 +409,14 @@ def make_order(request: HttpRequest):
         cant_product = data['cant_product']
         shipping_destination = data['shipping_destination']
 
+        if "code" not in cant_product:
+            return ReponseJsonError("Falta un campo", "En el campo cant_product falta el codigo", 400)
+        elif "cant" not in cant_product:
+            return ReponseJsonError("Falta un campo", "En el campo cant_product falta la cantidad", 400)
+
         client = Client.objects.get(identifier=identifier_client)
         seller = Seller.objects.get(identifier=identifier_seller)
         product = Product.objects.get(code=code_product)
-
-        Order.objects.create(seller=seller, client=client,)
 
         order = Order.objects.create(
             id=uuid.uuid4(),  # Generar un UUID manualmente si es necesario
@@ -424,6 +427,8 @@ def make_order(request: HttpRequest):
         )
 
         order.product.set([product])
+
+        order.save()
 
     except json.JSONDecodeError:
         return ReponseJsonError("Error de formato", "El json enviado no respeta el estandar habitual", 400)
