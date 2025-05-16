@@ -289,7 +289,7 @@ def get_orders(request: HttpRequest):
             "shipping_destination": order.shipping_destination,
             "seller": order.seller.name,
             "client": order.client.name,
-            "product": order.product,
+            "product": list(order.product.values_list('name')),
             "order_date": order.order_date,
             "date_update": order.date_update,
         }
