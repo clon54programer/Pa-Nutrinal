@@ -508,7 +508,10 @@ class TestViewMakeOrder(TestCase):
                 "identifier_client": "JP123",
                 "identifier_seller": "12345",
                 "code_product": "123",
-                "cant_product": 100,
+                "cant_product": {
+                    "code": "123",
+                    "cant": 100
+                },
                 "shipping_destination": "jajjdjjd"
             }
         }
