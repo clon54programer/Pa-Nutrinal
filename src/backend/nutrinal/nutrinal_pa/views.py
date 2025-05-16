@@ -269,6 +269,37 @@ def get_production(request: HttpRequest):
 
 
 @csrf_exempt
+def get_orders(request: HttpRequest):
+
+    if request.method != "GET":
+        return ReponseJsonError("Falta de permisos", "Esta ruta solo sse puede enviar informacion", 405)
+
+    if Order.objects.count() == 0:
+        return ReponseJson(204, StatusResponse.INVALID, {"message": "No hay datos en este modelo"})
+
+    data = {}
+    orders = Order.objects.all()
+
+    index: int = 0
+    for order in orders:
+        data[f"order_{index}"] = {
+            "id": order.id,
+            "cant_product": order.cant_product,
+            "status": order.status,
+            "shipping_destination": order.shipping_destination,
+            "seller": order.seller.name,
+            "client": order.client.name,
+            "product": order.product,
+            "order_date": order.order_date,
+            "date_update": order.date_update,
+        }
+
+        index += 1
+
+    return ReponseJson(200, StatusResponse.VALID, data)
+
+
+@csrf_exempt
 def make_product(request: HttpRequest):
     """
     Crea un producto, mediante el metodo post.
@@ -441,6 +472,8 @@ def make_order(request: HttpRequest):
 
     return ReponseJson(200, StatusResponse.VALID, {"message": "Se ha creado el pedido exitosamente"})
 
+
+# def update_order(request: HttpRequest)
 
 # def get_order_status(request: HttpRequest):
 
