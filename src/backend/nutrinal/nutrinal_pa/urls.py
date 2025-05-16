@@ -14,6 +14,7 @@ urlpatterns = [
     path("admin/get_client", views.get_client, name="get_client"),
     path("admin/get_product", views.get_product, name="get_product"),
     path("admin/get_production", views.get_production, name="get_production"),
+    path("admin/get_orders", views.get_orders, name="get_orders"),
     path("admin/make_product", views.make_product, name="make_product"),
     path("admin/update_production/<str:code_product>",
          views.update_production, name="update_production"),
