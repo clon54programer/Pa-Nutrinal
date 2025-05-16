@@ -231,7 +231,7 @@ class Order(models.Model):
     """
     id = models.UUIDField(default=uuid.uuid4, editable=False,
                           unique=True, primary_key=True)
-    cant_product = models.BigIntegerField(default=0)
+    cant_product = models.JSONField()
     status = models.CharField(max_length=50, choices=[
         ("pending", "Pendiente"),
         ("shipped", "Enviado"),
@@ -278,6 +278,7 @@ class Admin(models.Model):
     """
     username = models.CharField(max_length=120, unique=True)
     password = models.CharField(max_length=128, unique=True)
+    rol = models.CharField(default="TODO")
 
     def __str__(self) -> str:
         return f"username: {self.username}"
