@@ -269,6 +269,44 @@ def get_production(request: HttpRequest):
 
 
 @csrf_exempt
+def get_cant_product(request: HttpRequest):
+    if request.method != "POST":
+        return ReponseJsonError("Falta de permisos", "Esta ruta solo sse puede enviar informacion", 405)
+
+    if Production.objects.count() == 0:
+        return ReponseJson(204, StatusResponse.INVALID, {"message": "No hay datos en este modelo"})
+
+    cant_product = 0
+    try:
+        json_data = json.loads(request.body)
+
+        fields_missing = "code"
+
+        if fields_missing not in json_data:
+            return ReponseJsonError("Falta un campo", "El campo code no se encuentra en el json", 400)
+
+        code = json_data['code']
+
+        products = Product.objects.get(code=code)
+        productions = Production.objects.get(product=products)
+
+        cant_product = productions.cant_available
+
+    except json.JSONDecodeError:
+        return ReponseJsonError("Error de formato", "El json enviado no respeta el estandar habitual", 400)
+    except Product.DoesNotExist:
+        return ReponseJsonError("Dato no existe", "El codigo suministrado no existe", 404)
+
+    data = {
+        "data": {
+            "cant_product": cant_product
+        }
+    }
+
+    return ReponseJson(200, StatusResponse.VALID, data)
+
+
+@csrf_exempt
 def get_orders(request: HttpRequest):
 
     if request.method != "GET":

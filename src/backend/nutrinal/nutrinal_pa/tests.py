@@ -522,3 +522,20 @@ class TestViewMakeOrder(TestCase):
 
         self.assertEqual(200, r.status_code, "El codigo http es igual 200")
         print("json: ", r.json())
+
+
+class TestViewGetCantProduct(TestCase):
+
+    def test_post_data(self):
+
+        data = {
+            "code": "122466"
+        }
+
+        url = "http://127.0.0.1:8000/nutrinal_pa/admin/get_cant_product"
+
+        r = requests.post(url=url, json=data)
+
+        cant = r.json()
+
+        print("cant: ", cant)
