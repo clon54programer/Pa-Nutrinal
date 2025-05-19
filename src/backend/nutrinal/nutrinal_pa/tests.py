@@ -536,6 +536,6 @@ class TestViewGetCantProduct(TestCase):
 
         r = requests.post(url=url, json=data)
 
-        cant = r.json()
+        cant = r.json()['data']
 
         print("cant: ", cant)
