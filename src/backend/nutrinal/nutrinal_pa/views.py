@@ -541,8 +541,31 @@ def create_client(request: HttpRequest):
             if field not in data:
                 return ReponseJsonError("Falta un campo", f"El campo {field} no esta en el json", 400)
 
+        name = data['name']
+        email = data['email']
+        phone_number = data['phone_number']
+        identifier = data['identifier']
+
+        if Client.objects.filter(identifier=identifier).exists():
+            return ReponseJsonError("Data redudante", "El identificador ya existe en la base de datos")
+
+        if phone_number < 15:
+            return ReponseJsonError("Informacion invalida", "El numero de telefono supera los 15 caracteres")
+        if phone_number.is_digit() != False:
+            return ResourceWarning("Informacion invalidad", "e campo phone number tiene caracteres diferentes a un numero")
+
+        number = Client.objects.count()
+
+        client = Client.objects.create(
+            name=name, email=email, phone_number=phone_number, identifier=identifier)
+
+        client_login = ClientLogin.objects.create(
+            identifier=client, username=f"client_{number}", password="clientpass")
+
     except json.JSONDecodeError:
         return ReponseJsonError("Error de formato", "El json enviado no respeta el estandar habitual", 400)
+
+    return ReponseJson(200, StatusResponse.VALID, {"message": "El cliente ha sido creado exitosamente"})
 
 
 # ----------------------------------------------------#
