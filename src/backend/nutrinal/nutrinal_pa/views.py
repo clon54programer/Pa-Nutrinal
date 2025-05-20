@@ -517,4 +517,32 @@ def make_order(request: HttpRequest):
 
 # def get_history_orders(request: HttpRequest):
 
+def create_client(request: HttpRequest):
+    print()
+    # client = Client.objects.create(
+    # name="Carlos Rodríguez", email="carlos@example.com", phone_number="1234567890", identifier="CLT001")
+
+    if request.method != "POST":
+        return ReponseJsonError("Falta de permisos", "Esta ruta solo se puede enviar informacion", 405)
+
+    try:
+        json_data = json.loads(request.body)
+
+        fields_missing = ['name', 'email', 'phone_number', 'identifier']
+
+        data = json_data['data']
+
+        if "data" not in json_data:
+            return ReponseJsonError("Falta un campo", "El campo data no esta en el json", 400)
+
+        data = json_data['data']
+
+        for field in fields_missing:
+            if field not in data:
+                return ReponseJsonError("Falta un campo", f"El campo {field} no esta en el json", 400)
+
+    except json.JSONDecodeError:
+        return ReponseJsonError("Error de formato", "El json enviado no respeta el estandar habitual", 400)
+
+
 # ----------------------------------------------------#
