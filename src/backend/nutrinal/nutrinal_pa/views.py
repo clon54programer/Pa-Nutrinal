@@ -549,10 +549,8 @@ def create_client(request: HttpRequest):
         if Client.objects.filter(identifier=identifier).exists():
             return ReponseJsonError("Data redudante", "El identificador ya existe en la base de datos")
 
-        if phone_number < 15:
+        if len(phone_number) > 15:
             return ReponseJsonError("Informacion invalida", "El numero de telefono supera los 15 caracteres")
-        if phone_number.is_digit() != False:
-            return ResourceWarning("Informacion invalidad", "e campo phone number tiene caracteres diferentes a un numero")
 
         number = Client.objects.count()
 
