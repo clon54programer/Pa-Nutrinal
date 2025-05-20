@@ -516,7 +516,7 @@ def make_order(request: HttpRequest):
 # def get_order_status(request: HttpRequest):
 
 # def get_history_orders(request: HttpRequest):
-
+@csrf_exempt
 def create_client(request: HttpRequest):
     print()
     # client = Client.objects.create(
